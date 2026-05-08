@@ -15,6 +15,7 @@ sources:
 related:
   - spann
   - diskann
+  - svfusion
   - milvus
   - approximate-nearest-neighbor-search
   - second-tier-memory-for-vector-search
@@ -38,6 +39,8 @@ SPFresh is a SOSP 2023 disk-based vector search system for incremental in-place 
 
 SPFresh is the main update-freshness reference for billion-scale vector search. It should be cited whenever a system claims production readiness but only evaluates static indexes.
 
+[SVFusion](svfusion.md) is adjacent on the dynamic-workload axis, but it studies CPU-GPU-disk streaming search rather than SPANN-style disk-resident cluster maintenance.
+
 ## Key Evidence
 
 The paper reports 2.41x lower average tail latency than DiskANN under fresh updates, 4K QPS search plus 2K QPS update throughput on one NVMe SSD, and stable P99.9 latency around 4 ms in its update simulation.
@@ -45,6 +48,7 @@ The paper reports 2.41x lower average tail latency than DiskANN under fresh upda
 ## Related Pages
 
 - [SPFresh Source Note](../source-notes/spfresh-2023.md)
+- [SVFusion](svfusion.md)
 - [SPANN](spann.md)
 - [DiskANN](diskann.md)
 - [Milvus](milvus.md)

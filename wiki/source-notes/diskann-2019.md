@@ -16,6 +16,7 @@ related:
   - diskann
   - hnsw
   - nsg
+  - proximity-graph-theory-for-ann
   - approximate-nearest-neighbor-search
 confidence: high
 ---
@@ -47,4 +48,5 @@ DiskANN is an SSD-resident ANN system centered on a new graph construction algor
 - [DiskANN](../entities/diskann.md)
 - [HNSW](../entities/hnsw.md)
 - [NSG](../entities/nsg.md)
+- [Proximity Graph Theory for ANN](../topics/proximity-graph-theory-for-ann.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)

@@ -15,6 +15,7 @@ sources:
 related:
   - milvus
   - spann
+  - rnsg
   - approximate-nearest-neighbor-search
 confidence: high
 ---
@@ -36,6 +37,8 @@ VBASE is an OSDI 2023 PostgreSQL-based vector database system that unifies onlin
 
 VBASE is a query-semantics reference rather than a memory-tier design. It is useful when discussing whether billion-scale ANN systems only optimize pure TopK or can serve production database queries with filters and joins.
 
+[RNSG](rnsg.md) is now the closest graph-theoretic neighbor in the vault for filtered vector search: VBASE focuses on vector-relational query processing through relaxed monotonicity, while RNSG focuses on range-filtered graph-index structure.
+
 ## Key Evidence
 
 For complex queries beyond plain TopK, VBASE reports 100x-1000x lower latency than baseline vector systems under similar accuracy. For a join query, it reports about 7900x over PostgreSQL brute-force scan with recall 0.9992.
@@ -45,4 +48,5 @@ For complex queries beyond plain TopK, VBASE reports 100x-1000x lower latency th
 - [VBASE Source Note](../source-notes/vbase-2023.md)
 - [Milvus](milvus.md)
 - [SPANN](spann.md)
+- [RNSG](rnsg.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)

@@ -15,6 +15,7 @@ related:
   - diskann-2019
   - hnsw
   - nsg
+  - proximity-graph-theory-for-ann
   - second-tier-memory-for-vector-search
   - approximate-nearest-neighbor-search
 confidence: high
@@ -36,5 +37,6 @@ DiskANN is an SSD-resident billion-scale ANN system that combines the Vamana gra
 - [DiskANN Source Note](../source-notes/diskann-2019.md)
 - [HNSW](hnsw.md)
 - [NSG](nsg.md)
+- [Proximity Graph Theory for ANN](../topics/proximity-graph-theory-for-ann.md)
 - [Second-tier Memory for Vector Search](../topics/second-tier-memory-for-vector-search.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)

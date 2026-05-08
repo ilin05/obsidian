@@ -28,3 +28,25 @@ When reviewing thesis/project documents in this vault, separate three evidence c
 - Tags: review-scope, evidence-boundary, thesis
 
 ---
+## [LRN-20260508-001] correction
+
+**Logged**: 2026-05-08T11:52:27+08:00
+**Priority**: medium
+**Status**: pending
+**Area**: docs
+
+### Summary
+When maintaining the Obsidian wiki, stale pages and broken local references must be removed from the graph after sources or project direction changes.
+
+### Details
+The user pointed out that CXL-Vector content should be removed before a full rewrite, and that stale relationships such as TurboQuant figure links can remain visible even when the referenced files are no longer in the repository.
+
+### Suggested Action
+For wiki maintenance/refactor tasks, run both a CXL/topic mention audit and a local-reference existence audit across markdown links, image links, and YAML `sources` paths before finalizing.
+
+### Metadata
+- Source: user_feedback
+- Related Files: index.md, wiki/
+- Tags: obsidian, wiki-maintenance, stale-links
+
+---

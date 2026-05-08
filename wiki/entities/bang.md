@@ -14,6 +14,7 @@ sources:
   - raw/sources/papers/bang-2024.pdf
 related:
   - rummy
+  - svfusion
   - gustann
   - diskann
   - product-quantization
@@ -39,6 +40,8 @@ BANG is a single-GPU graph-based ANNS system for billion-scale datasets that exc
 
 BANG is a key out-of-GPU-memory graph baseline. It is related to RUMMY at the CPU-GPU scheduling layer and to DiskANN/GustANN at the graph-search layer.
 
+[SVFusion](svfusion.md) is the closest follow-on branch in this vault because it keeps the out-of-HBM GPU graph concern but adds streaming inserts, deletes, and cross-tier consistency.
+
 ## Key Evidence
 
 The paper reports 50x-400x higher throughput than competing methods at recall 0.9 on three billion-scale datasets using one NVIDIA A100 GPU.
@@ -47,6 +50,7 @@ The paper reports 50x-400x higher throughput than competing methods at recall 0.
 
 - [BANG Source Note](../source-notes/bang-2024.md)
 - [RUMMY](rummy.md)
+- [SVFusion](svfusion.md)
 - [GustANN](gustann.md)
 - [DiskANN](diskann.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)

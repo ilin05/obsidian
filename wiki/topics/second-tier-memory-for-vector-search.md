@@ -10,7 +10,7 @@ tags:
   - second-tier-memory
   - ssd
   - cxl
-source_count: 11
+source_count: 12
 sources:
   - raw/sources/papers/performance-index-size-dilemma-2024.pdf
   - raw/sources/papers/diskann-2019.pdf
@@ -23,6 +23,7 @@ sources:
   - raw/sources/papers/starling-2024.pdf
   - raw/sources/papers/bang-2024.pdf
   - raw/sources/papers/spfresh-2023.pdf
+  - raw/sources/papers/svfusion-2026.pdf
 related:
   - diskann
   - spann
@@ -33,6 +34,7 @@ related:
   - starling
   - bang
   - spfresh
+  - svfusion
   - disaggregated-memory-vector-search
   - approximate-nearest-neighbor-search
 confidence: medium
@@ -51,6 +53,7 @@ This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-
 - [Starling](../entities/starling.md) refines disk-resident graph search for vector database segments by combining in-memory navigation graphs, reordered disk graph layout, and block search.
 - [SPFresh](../entities/spfresh.md) adds the update-freshness dimension for disk-based vector search through in-place incremental rebalancing.
 - [RUMMY](../entities/rummy.md) and [BANG](../entities/bang.md) cover host-memory plus GPU execution when the full dataset or graph cannot fit in GPU memory.
+- [SVFusion](../entities/svfusion.md) adds a streaming CPU-GPU-disk branch: hot vectors/subgraphs in GPU HBM, complete graph coordination in CPU memory/disk, and update consistency across tiers.
 - [GustANN](../entities/gustann.md) and [FusionANNS](../entities/fusionanns.md) add the SSD+GPU branch: both reduce the cost of billion-scale search by keeping large data on SSD while using GPU selectively.
 - [SmartANNS](../entities/smartanns.md) adds the SmartSSD/NDP branch, where computation is moved into commercial computational-storage devices.
 - The performance/index-size dilemma paper argues that SSD access granularity drives throughput amplification in billion-scale search.
@@ -66,6 +69,7 @@ This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-
 | SSD/NVMe | 100-200 us | sequential-friendly | IVF posting lists, beam/search batching |
 | SSD + GPU | SSD latency plus PCIe transfer | high throughput if batched and transfer-efficient | GustANN/FusionANNS-style collaborative filtering, selective transfer, and rerank deduplication |
 | Host memory + GPU | DRAM latency plus PCIe transfer | high throughput if transfer/computation overlap | RUMMY/BANG-style batching, compressed GPU state, and CPU-GPU pipelining |
+| CPU-GPU-disk streaming | GPU HBM capacity plus PCIe and update synchronization | high throughput if hot vectors stay in HBM and updates avoid global rebuilds | SVFusion-style workload-aware placement, multi-version consistency, and lazy repair |
 | SmartSSD/NDP | local SSD/internal-device bandwidth plus FPGA compute | device-local parallelism | SmartANNS-style host coordination, shard pruning, and load-balanced near-data search |
 
 ## Open Questions
@@ -75,15 +79,17 @@ This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-
 - Can FusionANNS/GustANN-style batching and deduplication ideas transfer across storage and memory tiers without violating latency goals?
 - How should memory footprint be compared when CXL reduces DRAM use but still consumes total attached memory?
 - How should fresh updates be compared against static-index systems in the same memory-tier taxonomy?
+- Can SVFusion-style cache-placement metrics be reused for CXL or RDMA tiers, where misses are cheaper than SSD but still much slower than local DRAM/HBM?
 
 ## Related Pages
 
 - [DiskANN](../entities/diskann.md) · [SPANN](../entities/spann.md) · [Starling](../entities/starling.md) · [SPFresh](../entities/spfresh.md)
-- [RUMMY](../entities/rummy.md) · [BANG](../entities/bang.md) · [GustANN](../entities/gustann.md) · [FusionANNS](../entities/fusionanns.md) · [SmartANNS](../entities/smartanns.md)
+- [RUMMY](../entities/rummy.md) · [BANG](../entities/bang.md) · [SVFusion](../entities/svfusion.md) · [GustANN](../entities/gustann.md) · [FusionANNS](../entities/fusionanns.md) · [SmartANNS](../entities/smartanns.md)
 - [Disaggregated Memory Vector Search](disaggregated-memory-vector-search.md)
 - [Approximate Nearest Neighbor Search](approximate-nearest-neighbor-search.md)
 - [Performance vs Index-size Dilemma Source Note](../source-notes/performance-index-size-dilemma-2024.md)
 - [SPANN Source Note](../source-notes/spann-2021.md)
 - [GustANN Source Note](../source-notes/gustann-2025.md)
 - [FusionANNS Source Note](../source-notes/fusionanns-2025.md)
+- [SVFusion Source Note](../source-notes/svfusion-2026.md)
 - [CXL Memory Characterization Source Note](../source-notes/cxl-memory-characterization-2023.md)

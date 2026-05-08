@@ -14,6 +14,7 @@ sources:
   - raw/sources/papers/fusionanns-2025.pdf
 related:
   - gustann
+  - svfusion
   - spann
   - diskann
   - approximate-nearest-neighbor-search
@@ -38,6 +39,8 @@ FusionANNS is a FAST 2025 billion-scale ANNS system that combines SSD storage wi
 
 FusionANNS is important for memory-tiered ANN because it makes the accurate raw-vector stage explicit and then optimizes its I/O. It is an SSD+GPU design whose reranking structure is a useful template for thinking about coarse-to-exact search paths.
 
+[SVFusion](svfusion.md) is adjacent but different: FusionANNS is primarily an SSD+GPU filtering/reranking system, while SVFusion focuses on CPU-GPU-disk cooperation under streaming updates and consistency.
+
 ## Key Evidence
 
 At recall@10 = 90%, the paper reports 9.4x-13.1x higher QPS and 5.7x-8.8x higher cost efficiency than SPANN, and 2x-4.9x higher QPS plus 2.3x-6.8x higher cost efficiency than RUMMY.
@@ -45,6 +48,7 @@ At recall@10 = 90%, the paper reports 9.4x-13.1x higher QPS and 5.7x-8.8x higher
 ## Related Pages
 
 - [FusionANNS Source Note](../source-notes/fusionanns-2025.md)
+- [SVFusion](svfusion.md)
 - [GustANN](gustann.md)
 - [SPANN](spann.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)

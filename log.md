@@ -137,3 +137,83 @@ Moved the remaining inbox PDFs into `raw/sources/papers/`: `raw/sources/papers/g
 Updated source frontmatter references in GustANN/FusionANNS source notes, entity pages, topic pages, and the billion-scale literature map so they no longer point to `raw/inbox/`.
 
 `raw/inbox/` now only retains `.gitkeep`.
+
+## [2026-05-08 14:55] query | Graph-theoretic ANN inbox candidates
+
+Explored graph-theoretic papers related to the current ANN graph-index branch, especially proximity graphs, RNG/MRNG/HSP/MSNET, and navigable small-world ideas connected to HNSW, NSG, and DiskANN. Added six PDFs to `raw/inbox/`: Kleinberg small-world navigability, Malkov et al. NSW, Zhu/Zhang MRNG generalization, Satellite System Graph, Relative NN-Descent, and RNSG/RRNG. Created `wiki/analyses/graph-theoretic-ann-inbox-candidates.md` with the selection rationale, priority order, and high-value candidates not yet downloaded. Updated `index.md`.
+
+Unresolved questions: locate stable downloadable copies for Toussaint 1980 RNG, Jaromczyk/Toussaint 1992 RNG survey, Dearholt MSNET, Aurenhammer Voronoi survey, Navigating Nets, HHSP, and GRNG; decide whether to create a standalone topic page for proximity graph theory after ingest.
+
+## [2026-05-08 15:00] ingest | Proximity graph theory for ANN
+
+Ingested the graph-theoretic ANN PDFs from `raw/inbox/` and moved them to `raw/sources/papers/`: `kleinberg-small-world-2000.pdf`, `navigable-small-world-graph-ann-2014.pdf`, `monotonic-proximity-graphs-2021.pdf`, `satellite-system-graph-2019.pdf`, `relative-nn-descent-2023.pdf`, `rnsg-2026.pdf`, and the supplemental `graph-based-anns-survey-2021.pdf`.
+
+Created source notes for all seven papers, a new topic page `wiki/topics/proximity-graph-theory-for-ann.md`, and five entity pages: `monotonic-relative-neighborhood-graph.md`, `navigable-small-world-graph.md`, `satellite-system-graph.md`, `relative-nn-descent.md`, and `rnsg.md`. Updated `index.md`, `wiki/topics/approximate-nearest-neighbor-search.md`, HNSW/NSG/DiskANN/VBASE entity pages, and relevant HNSW/NSG/DiskANN source notes. Updated `wiki/analyses/graph-theoretic-ann-inbox-candidates.md` so the first batch is recorded as ingested, not still pending in inbox.
+
+Unresolved questions: still need stable copies for Toussaint RNG, Jaromczyk/Toussaint RNG survey, Dearholt MSNET, Aurenhammer Voronoi, Navigating Nets, HHSP, and GRNG; RNSG publication metadata remains uncertain because the arXiv PDF has placeholder PVLDB/DOI fields.
+
+## [2026-05-08 15:16] ingest | ANN benchmarks, graph survey expansion, and SVFusion
+
+Ingested the new inbox contents. `raw/inbox/sv-fusion.pdf` was moved to `raw/sources/papers/svfusion-2026.pdf` and converted into `wiki/source-notes/svfusion-2026.md` plus `wiki/entities/svfusion.md`. `raw/inbox/ann-benchmarks.pdf` was verified as byte-identical to the existing canonical `raw/sources/papers/ann-benchmarks-2018.pdf`; the duplicate inbox copy was removed after updating the canonical ANN-Benchmarks note and entity.
+
+Expanded `wiki/source-notes/ann-benchmarks-2018.md` with implementation-vs-algorithm benchmarking lessons, evaluated algorithm families, key results, and connections to graph/system benchmarks. Expanded `wiki/source-notes/graph-based-anns-survey-2021.md` with the four-family graph taxonomy, 13-algorithm map, seven pipeline components, empirical lessons, and missing primary-source coverage.
+
+Created `wiki/topics/ann-benchmarking-methodology.md` to separate implementation benchmarking, graph-component attribution, and hardware/update-aware system benchmarking. Created `wiki/analyses/ann-benchmarking-and-graph-coverage-gaps.md` as a candidate queue seeded by ANN-Benchmarks, Graph-Based ANNS Survey 2021, and SVFusion references.
+
+Updated `wiki/topics/approximate-nearest-neighbor-search.md`, `wiki/topics/second-tier-memory-for-vector-search.md`, `wiki/analyses/billion-scale-vector-search-literature-map.md`, `wiki/entities/fusionanns.md`, `wiki/entities/bang.md`, `wiki/entities/spfresh.md`, and `index.md`.
+
+Working synthesis: the ANN branch now has a clearer evaluation stack: ANN-Benchmarks for in-memory implementation-level Pareto frontiers, Graph-Based ANNS Survey 2021 for graph-family and component attribution, and SVFusion/SPFresh-style metrics for streaming updates and heterogeneous memory tiers.
+
+Unresolved questions: prioritize primary-source ingests for KGraph/NN-Descent, SPTAG, NGT, CAGRA, FreshDiskANN, and the Big ANN streaming benchmark protocol; decide whether lightweight entity pages should exist before those primary sources are downloaded.
+
+## [2026-05-08 15:29] query | ANN benchmark and graph survey inbox candidates
+
+Explored candidate papers based on `wiki/entities/ann-benchmarks.md` and `raw/sources/papers/graph-based-anns-survey-2021.pdf`. Downloaded eight valuable, non-duplicate PDFs into `raw/inbox/`: `nn-descent-2011.pdf`, `gnns-knn-graph-2011.pdf`, `efanna-2016.pdf`, `fanng-2016.pdf`, `dpg-ann-experiments-2016.pdf`, `ngt-onng-2018.pdf`, `flann-2014.pdf`, and `falconn-lsh-angular-2015.pdf`.
+
+Updated `wiki/analyses/ann-benchmarking-and-graph-coverage-gaps.md` with the downloaded inbox batch, rationale, and deferred candidates. Updated `index.md` to clarify that this analysis now records an inbox candidate queue.
+
+Working synthesis: the next ANN ingest batch should fill the gap between benchmark baselines and graph algorithm internals: KNNG construction (NN-Descent/KGraph), early graph traversal (GNNS), tree-initialized graph construction (EFANNA), RNG-style pruning (FANNG/DPG/NGT), and non-graph benchmark baselines (FLANN/FALCONN).
+
+Unresolved questions: still need stable PDFs or source decisions for SPTAG, HCNNG, PANNG/pruned bi-directed KNNG, Annoy, PyNNDescent, and IEH.
+
+## [2026-05-08 15:43] ingest | ANN graph baseline and non-graph benchmark papers
+
+Ingested the eight new inbox papers selected from ANN-Benchmarks and Graph-Based ANNS Survey 2021, then moved them from `raw/inbox/` into `raw/sources/papers/`: `nn-descent-2011.pdf`, `gnns-knn-graph-2011.pdf`, `efanna-2016.pdf`, `fanng-2016.pdf`, `dpg-ann-experiments-2016.pdf`, `ngt-onng-2018.pdf`, `flann-2014.pdf`, and `falconn-lsh-angular-2015.pdf`.
+
+Created source notes: `wiki/source-notes/nn-descent-2011.md`, `wiki/source-notes/gnns-knn-graph-2011.md`, `wiki/source-notes/efanna-2016.md`, `wiki/source-notes/fanng-2016.md`, `wiki/source-notes/dpg-ann-experiments-2016.md`, `wiki/source-notes/ngt-onng-2018.md`, `wiki/source-notes/flann-2014.md`, and `wiki/source-notes/falconn-lsh-angular-2015.md`.
+
+Created entity pages: `wiki/entities/nn-descent.md`, `wiki/entities/gnns.md`, `wiki/entities/efanna.md`, `wiki/entities/fanng.md`, `wiki/entities/diversified-proximity-graph.md`, `wiki/entities/ngt-onng.md`, `wiki/entities/flann.md`, and `wiki/entities/falconn.md`.
+
+Updated synthesis and navigation pages: `wiki/topics/approximate-nearest-neighbor-search.md`, `wiki/topics/proximity-graph-theory-for-ann.md`, `wiki/topics/ann-benchmarking-methodology.md`, `wiki/source-notes/ann-benchmarks-2018.md`, `wiki/source-notes/graph-based-anns-survey-2021.md`, `wiki/entities/ann-benchmarks.md`, `wiki/entities/nsg.md`, `wiki/source-notes/nsg-2019.md`, `wiki/entities/relative-nn-descent.md`, `wiki/source-notes/relative-nn-descent-2023.md`, `wiki/analyses/ann-benchmarking-and-graph-coverage-gaps.md`, and `index.md`.
+
+Working synthesis: the ANN branch now covers the missing bridge between benchmark baselines and graph-index internals: NN-Descent/KGraph for KNNG construction, GNNS for early graph traversal, EFANNA for tree-initialized graph construction and seeding, FANNG/DPG/NGT/ONNG for practical pruning and degree/path control, and FLANN/FALCONN for non-graph tree/LSH baselines.
+
+Unresolved questions: still need stable primary sources or source decisions for SPTAG, HCNNG, PANNG/pruned bi-directed KNNG, Annoy, PyNNDescent, IEH, CAGRA, FreshDiskANN, and Big ANN streaming benchmark protocols.
+
+## [2026-05-08 15:49] refactor | CXL-Vector paper agent cache and review/writer guides
+
+Created three root-level operating guides for CXL-Vector paper work: `CACHE.md`, `reviewer.md`, and `writer.md`.
+
+`CACHE.md` provides a short read path into the CXL/ANN knowledge base and fixes the intended CXL-Vector framing: capacity-wall motivation, bandwidth-sensitive transparent all-CXL placement, host-local compact traversal state, CXL-resident raw vectors, bounded exact rerank, and matched-recall evaluation.
+
+`reviewer.md` adapts the `vldb-section-reviewer` skill to this vault, including section-specific read paths, CXL-Vector-specific review checks, output file expectations, and minimum-fix bias.
+
+`writer.md` adapts the conservative `vldb-review-writer` workflow for CXL-Vector sections, including claim boundaries, allowed edit actions, forbidden overclaims, and expected writer change-summary output.
+
+Updated `index.md` with an operating-guides section so new agents can find these files before reading deeper wiki pages.
+
+Unresolved questions: once the actual CXL-Vector paper repository path and section filenames are known, these guides may need one line pointing to the paper-local implementation context file.
+
+## [2026-05-08 15:53] refactor | General ANNS system paper cache and review/writer guides
+
+Created root-level general ANNS operating guides: `CACHE.md`, `reviewer.md`, and `writer.md`.
+
+`CACHE.md` is now a compact read path for ANNS system agents, covering the main ANN synthesis, benchmarking methodology, graph survey, proximity-graph theory, in-memory graph baselines, quantization/library baselines, SSD/second-tier systems, GPU/heterogeneous systems, CXL/RDMA/NDP systems, and vector DB semantics.
+
+`reviewer.md` adapts the `vldb-section-reviewer` skill to general ANNS system paper review. It defines claim-specific source paths, baseline expectations, evaluation checks, minimum-fix stance, and exact review/fix output requirements.
+
+`writer.md` provides a conservative writer workflow for ANNS paper sections after review: weaken unsupported claims, clarify mechanisms, preserve matched-recall framing, and avoid invented numbers, baselines, experiments, or citations.
+
+Updated `index.md` operating-guide labels from CXL-Vector-specific to general ANNS-system-specific.
+
+Unresolved questions: if a specific ANNS paper repository has local implementation context, add a short pointer from `CACHE.md` to that paper-local file.
