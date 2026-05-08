@@ -56,9 +56,9 @@ Score-aware loss applied to both PQ codebook learning and partition assignment.
 - MIPS (cosine/inner product) primary focus; L2 via reduction.
 - Does not address billion-scale out-of-memory scenarios or heterogeneous memory tiers.
 
-## Relation to CXL-Vector
+## Relation to Out-of-DRAM ANN
 
 - ScaNN is the strongest **in-DRAM** quantized ANN baseline. It defines the DRAM performance ceiling.
-- ScaNN's two-stage pipeline (partition → score) is structurally analogous to CXL-Vector's coarse-SQ8-routing → exact-remote-rerank.
-- Key contrast: ScaNN assumes uniform flat DRAM; CXL-Vector addresses the case where data exceeds DRAM and resides in CXL.
-- Score-aware loss is potentially applicable to improving CXL-Vector's SQ8 coarse routing quality (open research direction).
+- ScaNN's two-stage pipeline (partition → score) is structurally relevant to coarse-to-exact designs in other memory tiers.
+- Key contrast: ScaNN assumes uniform flat DRAM and does not address SSD/CXL/RDMA memory tiers directly.
+- Score-aware loss is potentially applicable to improving coarse routing quality in future memory-tiered ANN systems.

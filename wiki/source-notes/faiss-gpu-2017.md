@@ -57,12 +57,12 @@ A GPU-optimized similarity search system built around two novel components: a ne
 - SIFT1M, k=100: 8.5× faster than prior GPU implementation.
 - Billion-scale 128-dim float vectors: processed on 4 GPU server in under 12 hours.
 
-## Relevance to CXL-Vector
+## Relevance to ANN Systems
 
 - Establishes FAISS/IVFPQ as the canonical ANN baseline; must be cited in any paper on ANN serving.
-- WarpSelect pattern (register-resident selection, kernel fusion) is conceptually analogous to CXL-Vector's design goal of keeping hot state local and avoiding remote traffic per-query.
-- IVFPQ coarse-to-exact structure is the in-DRAM precursor to SPANN (DRAM+SSD) and CXL-Vector (DRAM+CXL) designs.
-- GPU-centric design assumes all data fits in fast GPU memory; CXL-Vector addresses the regime where data exceeds local DRAM.
+- WarpSelect shows the value of keeping hot selection state local and fusing work to avoid extra memory traffic.
+- IVFPQ coarse-to-exact structure is the in-DRAM precursor to SPANN-style DRAM+SSD designs and other memory-tiered systems.
+- GPU-centric design assumes all data fits in fast GPU memory or can be sharded across GPUs.
 
 ## Open Questions
 

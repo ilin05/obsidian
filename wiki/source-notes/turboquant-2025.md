@@ -11,7 +11,7 @@ tags:
   - turboquant
 source_count: 1
 sources:
-  - raw/TurboQuant.pdf
+  - raw/sources/papers/turboquant-2025.pdf
 related:
   - turboquant
   - qjl

@@ -52,14 +52,14 @@ where the weight function w is score-aware (monotonically non-decreasing), makin
 - Better recall than QUIPS (variants) and LSQ at matched bitrate on Glove-1.2M.
 - Significantly more accurate inner product value approximations vs reconstruction loss at all bitrates.
 
-## Relevance to CXL-Vector
+## Relevance to Out-of-DRAM ANN
 
-- ScaNN is the strongest in-DRAM quantized ANN baseline for high recall. It defines the in-DRAM performance ceiling that CXL-Vector's design must account for when data exceeds DRAM capacity.
-- ScaNN's two-stage structure (partition → score) is conceptually analogous to CXL-Vector's coarse SQ8 routing → exact remote rerank.
-- Key contrast: ScaNN assumes all data fits in DRAM and optimizes for MIPS; CXL-Vector explicitly addresses the CXL remote memory tier and optimizes for L2 distance under bandwidth constraints.
-- Score-aware quantization is also relevant for CXL-Vector's coarse routing quality: if SQ8 routing were score-aware it might reduce unnecessary remote fetches.
+- ScaNN is a strong in-DRAM quantized ANN baseline for high recall. It defines an in-DRAM performance ceiling for systems that move data to slower tiers.
+- ScaNN's two-stage structure (partition → score) is conceptually relevant to coarse-to-exact search designs.
+- Key contrast: ScaNN assumes all data fits in DRAM and optimizes for MIPS; it does not directly address SSD/CXL/RDMA memory tiers.
+- Score-aware quantization may be relevant for coarse routing quality in future memory-tiered ANN systems.
 
 ## Open Questions
 
-- Does score-aware loss generalize beyond MIPS to L2 distance search (CXL-Vector's primary metric)?
-- At billion scale where data doesn't fit in DRAM, what is the right comparison between ScaNN+SPANN and CXL-Vector?
+- Does score-aware loss generalize beyond MIPS to L2 distance search?
+- At billion scale where data does not fit in DRAM, what is the right comparison between ScaNN-like in-DRAM search and SSD/CXL/RDMA-backed systems?

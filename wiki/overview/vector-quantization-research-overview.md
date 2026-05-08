@@ -11,9 +11,9 @@ tags:
   - retrieval
 source_count: 3
 sources:
-  - raw/QJL.pdf
-  - raw/pq.pdf
-  - raw/TurboQuant.pdf
+  - raw/sources/papers/qjl-2024.pdf
+  - raw/sources/papers/product-quantization-2011.pdf
+  - raw/sources/papers/turboquant-2025.pdf
 related:
   - vector-quantization
   - kv-cache-quantization

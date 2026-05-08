@@ -35,7 +35,7 @@ Comprehensive description of the Faiss library architecture, design philosophy, 
 - **Not a database:** no concurrent writes, no transactions, no sharding, no query optimization.
 - **Embedding contract:** distance metric is agreed between extractor and index; index is pure geometry.
 - **Tradeoff axes:** accuracy, speed, memory usage — navigated via Pareto frontier.
-- **IndexRefine pattern:** fast approximate index shortlists candidates; accurate index reranks. Directly parallels CXL-Vector's coarse-SQ8-routing → exact-rerank pipeline.
+- **IndexRefine pattern:** fast approximate index shortlists candidates; accurate index reranks. This is a general coarse-to-exact pipeline pattern.
 
 ## Index Taxonomy
 
@@ -60,7 +60,7 @@ Comprehensive description of the Faiss library architecture, design philosophy, 
 
 - IVF_SQ8 uses scalar quantizer as the fine quantizer inside inverted lists.
 - Compressed-domain distance: precomputed lookup tables allow O(dk+mn) distance computation vs O(nd) for exact.
-- SQ8 offers 4× compression vs float32 with low encoding/decoding cost — exactly what CXL-Vector uses for coarse routing metadata.
+- SQ8 offers 4× compression vs float32 with low encoding/decoding cost.
 
 ## Pareto Frontier Navigation
 
@@ -76,14 +76,14 @@ Comprehensive description of the Faiss library architecture, design philosophy, 
 - IndexFactory string spec for easy construction (e.g., "IVF1024,PQ16").
 - 5200+ citation count as of paper writing time.
 
-## Relevance to CXL-Vector
+## Relevance to ANN Systems
 
 - Definitive reference for FAISS as a baseline system.
-- SQ8 quantizer description provides the canonical citation for CXL-Vector's coarse routing metadata format.
-- IndexRefine pattern directly mirrors CXL-Vector's coarse-local → exact-remote execution split.
-- HNSW support in Faiss defines the graph-index baseline that CXL-Vector extends to CXL-aware serving.
+- SQ8 quantizer description provides a canonical citation for scalar-quantized ANN metadata.
+- IndexRefine is a general coarse-to-exact execution split.
+- HNSW support in Faiss defines a graph-index baseline for in-memory systems.
 
 ## Open Questions
 
 - How does Faiss HNSW compare at billion scale vs DiskANN/SPANN where the index doesn't fit in DRAM?
-- What is the overhead of SQ8 re-scoring vs full-precision rerank, and how does this scale with CXL access latency?
+- What is the overhead of SQ8 re-scoring vs full-precision rerank, and how does this scale when data moves to a slower memory or storage tier?

@@ -11,8 +11,8 @@ tags:
   - systems
 source_count: 2
 sources:
-  - raw/Unlocking the Potential of CXL for Disaggregated Memory in CloudNative Databases.pdf
-  - raw/Unlocking the Potential of CXL for Disaggregated Memory in Cloud-Native Databases.md
+  - raw/sources/papers/polarcxlmem-2025.pdf
+  - raw/sources/notes/polarcxlmem-notes.md
 related:
   - polarcxlmem
   - cxl-disaggregated-memory-systems
@@ -46,4 +46,3 @@ This paper presents PolarCXLMem, a CXL-switch-based disaggregated-memory system 
 
 - [PolarCXLMem](../entities/polarcxlmem.md)
 - [CXL Disaggregated Memory Systems](../topics/cxl-disaggregated-memory-systems.md)
-

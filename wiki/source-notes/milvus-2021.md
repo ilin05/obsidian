@@ -49,7 +49,7 @@ Key insight from Faiss: one thread per query, all threads stream the full datase
 s = L3_size / (d × sizeof(float) + t × k × (sizeof(int64) + sizeof(float)))
 
 - 1.5–2.7× improvement over Faiss on CPU due to reuse of database vectors across queries.
-- Directly relevant: CXL-Vector's morsel-driven batching pursues a similar principle — batch multiple queries together to amortize remote memory fetch cost.
+- Directly relevant: Milvus shows how batching multiple queries together can amortize data movement and improve cache behavior.
 
 ## SIMD Optimizations
 
@@ -60,7 +60,7 @@ Auto-selects at runtime: SSE, AVX, AVX2, AVX512 (hook-based function pointer dis
 - LSM-tree structure: insertions/deletions go to in-memory MemTable → flushed to immutable segments.
 - Snapshot isolation: concurrent reads see consistent snapshot.
 - Merge policy: segments merged until configurable size limit (e.g., 1GB).
-- **Key distinction from CXL-Vector:** Milvus supports dynamic updates; CXL-Vector is explicitly a read-only serving runtime.
+- Milvus supports dynamic updates and full DBMS behavior rather than only standalone ANN serving.
 
 ## Distributed System
 
@@ -80,13 +80,12 @@ Two algorithms: vector fusion (inner product decomposable similarity) and iterat
 
 Only Milvus simultaneously supports: billion-scale data, dynamic data, GPU, attribute filtering, multi-vector query, distributed system.
 
-## Relevance to CXL-Vector
+## Relevance to ANN Systems
 
-- Milvus is the canonical production vector database reference. CXL-Vector should be positioned as a CXL-aware serving runtime (complementary to, not competing with, full systems like Milvus).
-- The cache-aware batch query optimization in Milvus is the CPU-local precursor to CXL-Vector's morsel-driven batching, which extends the same principle to the DRAM+CXL tier.
-- Milvus's HNSW + quantized index combination (HNSW for graph traversal, SQ8 for compression) mirrors CXL-Vector's design; the CXL dimension adds a new constraint that Milvus doesn't address.
+- Milvus is the canonical production vector database reference.
+- The cache-aware batch query optimization in Milvus is a useful CPU-local precedent for batch-oriented search.
+- Milvus's HNSW + quantized index combination is relevant to graph traversal plus compressed scoring designs.
 
 ## Open Questions
 
-- Would a Milvus-like production system benefit from CXL-Vector's layout and scheduling techniques when scaled beyond single-node DRAM?
-- How does Milvus's segment-based scheduling compare to CXL-Vector's morsel-driven query scheduling in throughput characteristics?
+- How does Milvus's segment-based scheduling compare to other batch-oriented query scheduling approaches?

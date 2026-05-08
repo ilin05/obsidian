@@ -12,7 +12,7 @@ tags:
   - retrieval
 source_count: 1
 sources:
-  - raw/TurboQuant.pdf
+  - raw/sources/papers/turboquant-2025.pdf
 related:
   - turboquant-2025
   - qjl

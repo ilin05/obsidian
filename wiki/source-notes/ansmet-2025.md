@@ -10,7 +10,7 @@ tags:
   - hardware-software-codesign
 source_count: 1
 sources:
-  - raw/ANSMET- .pdf
+  - raw/sources/papers/ansmet-2025.pdf
 related:
   - ansmet
   - approximate-nearest-neighbor-search
@@ -43,4 +43,3 @@ ANSMET proposes a hardware-software co-design for ANN search that offloads dista
 
 - [ANSMET](../entities/ansmet.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

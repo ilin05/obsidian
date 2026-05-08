@@ -11,7 +11,7 @@ tags:
   - rabitq
 source_count: 1
 sources:
-  - raw/rabbitq.pdf
+  - raw/sources/papers/rabitq-2024.pdf
 related:
   - rabitq-extension-2024
   - approximate-nearest-neighbor-search

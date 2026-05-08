@@ -11,7 +11,7 @@ tags:
   - dense-retrieval
 source_count: 1
 sources:
-  - raw/patience.pdf
+  - raw/sources/papers/patience-in-proximity-2025.pdf
 related:
   - patience-in-proximity
   - hnsw
@@ -45,4 +45,3 @@ This paper proposes a lightweight early-termination strategy for HNSW traversal,
 - [Patience in Proximity](../entities/patience-in-proximity.md)
 - [HNSW](../entities/hnsw.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

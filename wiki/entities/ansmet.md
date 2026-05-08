@@ -10,7 +10,7 @@ tags:
   - near-memory-processing
 source_count: 1
 sources:
-  - raw/ANSMET- .pdf
+  - raw/sources/papers/ansmet-2025.pdf
 related:
   - ansmet-2025
   - approximate-nearest-neighbor-search
@@ -32,4 +32,3 @@ ANSMET is an ANN acceleration method that combines near-memory processing with h
 
 - [ANSMET Source Note](../source-notes/ansmet-2025.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

@@ -55,7 +55,7 @@ Two-paper lineage:
 
 - **WarpSelect:** GPU k-selection operating entirely in registers; fuseable with distance kernels; 1.6–2× faster than prior art.
 - **IVFADC:** inverted file with asymmetric distance computation; coarse quantizer shortlists, PQ lookup tables score within lists.
-- **IndexRefine:** fast approximate index to generate candidate shortlist → accurate reranker. Directly mirrors CXL-Vector's coarse-routing → exact-rerank split.
+- **IndexRefine:** fast approximate index to generate candidate shortlist → accurate reranker. This is a general coarse-to-exact pattern used across ANN systems.
 - **Scalar quantizer (SQ8):** uniform per-dimension quantization from float32 to 1 byte. No codebook training needed. Used in IVF_SQ8.
 
 ## Performance
@@ -72,9 +72,8 @@ Two-paper lineage:
 - Billion-scale on GPU requires 80+ GB GPU memory or multi-GPU sharding — expensive.
 - Does not address CXL or heterogeneous memory tiers.
 
-## Relation to CXL-Vector
+## Relation to ANN Systems
 
-- FAISS HNSW is the canonical in-DRAM HNSW baseline. CXL-Vector's contribution is extending HNSW serving to the regime where the index exceeds DRAM.
-- FAISS IVF_SQ8 provides the authoritative description of the SQ8 format used in CXL-Vector's coarse routing metadata.
-- FAISS IndexRefine is the conceptual precursor to CXL-Vector's coarse-to-exact pipeline.
-- CXL-Vector must cite FAISS as the baseline system and compare against its HNSW/IVF_SQ8 implementations.
+- FAISS HNSW is a canonical in-DRAM HNSW baseline.
+- FAISS IVF_SQ8 provides an authoritative implementation reference for scalar-quantized ANN indexes.
+- FAISS IndexRefine is a conceptual precursor to many coarse-to-exact pipelines.

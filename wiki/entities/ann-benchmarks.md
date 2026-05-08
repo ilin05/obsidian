@@ -56,9 +56,9 @@ Entire query set given at once; useful for evaluating throughput-oriented system
 - Benchmarks implementations, not algorithm ideas.
 - ~50 algorithm implementations available.
 
-## Relation to CXL-Vector
+## Relation to Out-of-DRAM ANN
 
 - Must cite when reporting recall vs QPS on SIFT1M, GloVe, or other ANN-Benchmarks datasets.
-- Batch mode is analogous to CXL-Vector's throughput measurement, but ANN-Benchmarks assumes all data in DRAM — CXL-Vector evaluation requires separate protocol.
+- Batch mode is useful for throughput measurement, but ANN-Benchmarks assumes all data in DRAM.
 - The Pareto frontier format is the expected visualization for recall-throughput results in the paper.
-- Key limitation to note in the paper: ANN-Benchmarks cannot capture the memory-tier cost of CXL-Vector experiments, so its baselines represent an **optimistic upper bound** for in-DRAM systems.
+- Key limitation: ANN-Benchmarks cannot capture the cost of SSD/CXL/RDMA memory tiers, so its baselines represent an **optimistic upper bound** for in-DRAM systems.

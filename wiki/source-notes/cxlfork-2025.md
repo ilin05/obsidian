@@ -11,7 +11,7 @@ tags:
   - systems
 source_count: 1
 sources:
-  - raw/CXLfork.pdf
+  - raw/sources/papers/cxlfork-2025.pdf
 related:
   - cxlfork
   - cxl-disaggregated-memory-systems
@@ -45,4 +45,3 @@ This paper proposes CXLfork, a remote-fork interface over shared CXL memory for 
 
 - [CXLfork](../entities/cxlfork.md)
 - [CXL Disaggregated Memory Systems](../topics/cxl-disaggregated-memory-systems.md)
-

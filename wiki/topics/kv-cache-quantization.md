@@ -10,8 +10,8 @@ tags:
   - quantization
 source_count: 2
 sources:
-  - raw/QJL.pdf
-  - raw/TurboQuant.pdf
+  - raw/sources/papers/qjl-2024.pdf
+  - raw/sources/papers/turboquant-2025.pdf
 related:
   - qjl
   - turboquant

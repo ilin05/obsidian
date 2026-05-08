@@ -11,7 +11,7 @@ tags:
   - systems
 source_count: 1
 sources:
-  - raw/CXL-ANNS.pdf
+  - raw/sources/papers/cxl-anns-2024.pdf
 related:
   - cxl-anns
   - disaggregated-memory-vector-search
@@ -46,4 +46,3 @@ This paper presents CXL-ANNS, a software-hardware co-design for billion-scale AN
 - [CXL-ANNS](../entities/cxl-anns.md)
 - [Disaggregated Memory Vector Search](../topics/disaggregated-memory-vector-search.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

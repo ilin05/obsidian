@@ -5,7 +5,6 @@ This file is the primary catalog for the vault's durable wiki content.
 ## Overview
 
 - [Vector Quantization Research Overview](wiki/overview/vector-quantization-research-overview.md) - Working overview of the current quantization cluster spanning retrieval and KV-cache compression.
-- [CXL-Vector VLDB Paper](wiki/overview/cxl-vector-vldb-paper.md) - Current paper-level entry point for the commodity-CXL HNSW serving runtime.
 
 ## Topics
 
@@ -15,8 +14,6 @@ This file is the primary catalog for the vault's durable wiki content.
 - [Second-tier Memory for Vector Search](wiki/topics/second-tier-memory-for-vector-search.md) - System-level framing of SSD vs CXL/second-tier-memory trade-offs for billion-scale ANN.
 - [Disaggregated Memory Vector Search](wiki/topics/disaggregated-memory-vector-search.md) - CXL/RDMA-oriented ANN serving patterns, including caching, layout, and pipeline design.
 - [CXL Disaggregated Memory Systems](wiki/topics/cxl-disaggregated-memory-systems.md) - Cross-domain CXL system patterns spanning ANN, databases, and serverless runtimes.
-- [Commodity CXL HNSW Serving](wiki/topics/cxl-vector-commodity-cxl-hnsw-serving.md) - Refreshed CXL-Vector system design centered on commodity CXL, HNSW, SQ8/VNNI, bounded rerank, and morsel execution.
-- [Cross-Query Rerank Coalescing](wiki/topics/cross-query-rerank-coalescing.md) - Proposed morsel-local deduplication mechanism for reducing duplicate CXL raw-vector fetches.
 
 ## Entities
 
@@ -34,12 +31,19 @@ This file is the primary catalog for the vault's durable wiki content.
 - [DiskANN](wiki/entities/diskann.md) - SSD-resident billion-scale ANN system centered on Vamana graph indexing.
 - [CXL-ANNS](wiki/entities/cxl-anns.md) - CXL memory disaggregation and software-hardware co-design for billion-point ANN.
 - [d-HNSW](wiki/entities/d-hnsw.md) - RDMA-disaggregated adaptation of HNSW serving for lower network overhead.
+- [GustANN](wiki/entities/gustann.md) - GPU-centric, CPU-assisted SSD graph ANNS system for high-throughput billion-scale search.
+- [FusionANNS](wiki/entities/fusionanns.md) - SSD+GPU collaborative filtering and reranking system for billion-scale vector search.
+- [RUMMY](wiki/entities/rummy.md) - GPU-accelerated IVF query-processing system for datasets beyond GPU memory using reordered pipelining.
+- [SmartANNS](wiki/entities/smartanns.md) - SmartSSD/NDP billion-point ANNS system using host coordination, task scheduling, and shard pruning.
+- [VBASE](wiki/entities/vbase.md) - PostgreSQL-based vector database engine that unifies vector similarity and relational queries through relaxed monotonicity.
+- [Starling](wiki/entities/starling.md) - Disk-resident graph-index framework for vector database segments using navigation graphs, block shuffling, and block search.
+- [BANG](wiki/entities/bang.md) - Single-GPU graph ANNS system using compressed vectors on GPU and host-resident graph access.
+- [SPFresh](wiki/entities/spfresh.md) - Disk-based billion-scale vector search system for incremental in-place updates via LIRE.
 - [Patience in Proximity](wiki/entities/patience-in-proximity.md) - Saturation-based early termination heuristic for HNSW traversal.
 - [ANSMET](wiki/entities/ansmet.md) - Near-memory ANN acceleration with hybrid early termination.
 - [CXLfork](wiki/entities/cxlfork.md) - CXL-based remote process cloning interface for serverless-style workloads.
 - [PolarCXLMem](wiki/entities/polarcxlmem.md) - CXL-switch-based disaggregated-memory architecture for cloud-native databases.
-- [CXL-Vector](wiki/entities/cxl-vector.md) - In-vault commodity-CXL HNSW serving runtime and current VLDB paper project.
-- [Morsel-driven Parallelism](wiki/entities/morsel-driven-parallelism.md) - NUMA-aware dynamic scheduling concept adapted here to batched ANN search.
+- [Morsel-driven Parallelism](wiki/entities/morsel-driven-parallelism.md) - NUMA-aware dynamic scheduling concept from database query execution.
 
 ## Personal
 
@@ -69,10 +73,15 @@ This file is the primary catalog for the vault's durable wiki content.
 - [CXLfork: Fast Remote Fork over CXL Fabrics](wiki/source-notes/cxlfork-2025.md) - Source note on CXL-based remote fork and cluster-wide state sharing.
 - [Unlocking the Potential of CXL for Disaggregated Memory in Cloud-Native Databases](wiki/source-notes/polarcxlmem-2025.md) - Source note on PolarCXLMem and PolarRecv for CXL-native cloud databases.
 - [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](wiki/source-notes/morsel-driven-parallelism-2014.md) - Source note on the original morsel-driven scheduling paper.
-- [CXL-Vector VLDB Outline](wiki/source-notes/cxl-vector-vldb-outline-2026.md) - Source note on the current paper outline, structure, contributions, and evaluation plan.
-- [CXL-Vector Introduction Draft](wiki/source-notes/cxl-vector-introduction-draft-2026.md) - Source note on the current introduction narrative and reviewer-facing risks.
-- [Cross-Query Rerank Coalescing Plan](wiki/source-notes/cross-query-rerank-coalescing-plan-2026.md) - Source note on the proposed CXL-specific rerank deduplication mechanism.
+- [High-Throughput, Cost-Effective Billion-Scale Vector Search with a Single GPU](wiki/source-notes/gustann-2025.md) - Source note on GustANN, an SSD graph ANNS system using GPU traversal, CPU-assisted transfer, and pivot search.
+- [Towards High-throughput and Low-latency Billion-scale Vector Search via CPU/GPU Collaborative Filtering and Re-ranking](wiki/source-notes/fusionanns-2025.md) - Source note on FusionANNS, an SSD+GPU system using multi-tier indexing, heuristic reranking, and I/O deduplication.
+- [Fast Vector Query Processing for Large Datasets Beyond GPU Memory with Reordered Pipelining](wiki/source-notes/rummy-2024.md) - Source note on RUMMY, a GPU/host-memory IVF query-processing system with reordered pipelining.
+- [Scalable Billion-point Approximate Nearest Neighbor Search Using SmartSSDs](wiki/source-notes/smartanns-2024.md) - Source note on SmartANNS, a SmartSSD-based host/NDP billion-point ANNS system.
+- [VBASE: Unifying Online Vector Similarity Search and Relational Queries via Relaxed Monotonicity](wiki/source-notes/vbase-2023.md) - Source note on VBASE and relaxed-monotonicity vector-relational query processing.
+- [Starling: An I/O-Efficient Disk-Resident Graph Index Framework for High-Dimensional Vector Similarity Search on Data Segment](wiki/source-notes/starling-2024.md) - Source note on Starling's segment-level disk graph layout and block search.
+- [BANG: Billion-Scale Approximate Nearest Neighbour Search using a Single GPU](wiki/source-notes/bang-2024.md) - Source note on BANG's single-GPU graph ANNS design with compressed vectors and host graph access.
+- [SPFresh: Incremental In-Place Update for Billion-Scale Vector Search](wiki/source-notes/spfresh-2023.md) - Source note on SPFresh and LIRE for fresh updates in disk-based vector search.
 
 ## Analyses
 
-- [CXL-Vector VLDB Positioning](wiki/analyses/cxl-vector-vldb-positioning.md) - Durable synthesis of current paper claim, wording boundaries, reviewer questions, and evidence risks.
+- [Billion-Scale Vector Search Literature Map](wiki/analyses/billion-scale-vector-search-literature-map.md) - Research map of covered and not-yet-ingested billion-scale vector search systems.

@@ -66,14 +66,14 @@ Standard datasets used across ANN papers (fetched automatically):
 - ~50 implementations across multiple algorithm families (LSH, tree, graph, quantization).
 - Cannot directly benchmark billion-scale or out-of-core systems.
 
-## Relevance to CXL-Vector
+## Relevance to Out-of-DRAM ANN
 
 - ANN-Benchmarks is the standard citation when reporting speed-recall curves on SIFT1M or GloVe. Must be cited when comparing against FAISS, ScaNN, HNSW baselines on these datasets.
-- The batch mode evaluation is directly relevant to CXL-Vector's morsel-driven throughput evaluation: batch QPS is a different metric than single-query latency.
-- Limitation: ANN-Benchmarks cannot evaluate CXL-aware systems because it assumes in-memory storage. CXL-Vector evaluation requires a separate protocol, which should be noted in the paper.
+- Batch mode evaluation is directly relevant to throughput-oriented systems: batch QPS is a different metric than single-query latency.
+- Limitation: ANN-Benchmarks cannot evaluate CXL/SSD/RDMA-aware systems directly because it assumes in-memory storage.
 - ANN-Benchmarks Pareto frontier framing is the expected presentation format for recall vs. throughput results.
 
 ## Open Questions
 
-- Should CXL-Vector evaluation adopt a billion-scale benchmark (BigANN) instead of SIFT1M-scale ANN-Benchmarks datasets?
-- How to fairly compare single-node CXL-Vector throughput vs in-memory HNSW baselines when memory tiers differ?
+- Should out-of-DRAM systems adopt billion-scale benchmarks such as BigANN instead of SIFT1M-scale ANN-Benchmarks datasets?
+- How should single-node throughput be compared against in-memory HNSW baselines when memory tiers differ?

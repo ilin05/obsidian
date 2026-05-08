@@ -11,7 +11,7 @@ tags:
   - product-quantization
 source_count: 1
 sources:
-  - raw/pq.pdf
+  - raw/sources/papers/product-quantization-2011.pdf
 related:
   - product-quantization-for-nearest-neighbor-search-2011
   - approximate-nearest-neighbor-search

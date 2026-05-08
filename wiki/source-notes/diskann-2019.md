@@ -11,7 +11,7 @@ tags:
   - diskann
 source_count: 1
 sources:
-  - raw/DiskANN.pdf
+  - raw/sources/papers/diskann-2019.pdf
 related:
   - diskann
   - hnsw
@@ -48,4 +48,3 @@ DiskANN is an SSD-resident ANN system centered on a new graph construction algor
 - [HNSW](../entities/hnsw.md)
 - [NSG](../entities/nsg.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

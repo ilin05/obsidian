@@ -10,7 +10,7 @@ tags:
   - serverless
 source_count: 1
 sources:
-  - raw/CXLfork.pdf
+  - raw/sources/papers/cxlfork-2025.pdf
 related:
   - cxlfork-2025
   - cxl-disaggregated-memory-systems
@@ -32,4 +32,3 @@ CXLfork is a CXL-based remote-fork interface for fast cross-node process cloning
 
 - [CXLfork Source Note](../source-notes/cxlfork-2025.md)
 - [CXL Disaggregated Memory Systems](../topics/cxl-disaggregated-memory-systems.md)
-

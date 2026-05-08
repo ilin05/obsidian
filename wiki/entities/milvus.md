@@ -16,7 +16,6 @@ sources:
 related:
   - faiss
   - approximate-nearest-neighbor-search
-  - cxl-vector
 confidence: high
 ---
 
@@ -48,20 +47,20 @@ Milvus is a production-grade, open-source vector DBMS designed for large-scale, 
 - **Storage engine:** LSM-tree with MemTable → immutable segments; snapshot isolation; multi-filesystem (S3/HDFS).
 - **GPU engine:** CUDA-based, SIMD-instruction-set auto-detection at runtime via hook-based function pointer.
 
-## Optimization Insights Relevant to CXL-Vector
+## Optimization Insights
 
-**Cache-aware query batching:** partitions m queries × n data vectors into blocks of size s fitting L3 cache. Achieves 1.5–2.7× over Faiss by reusing database vectors across queries. This is the CPU-local precursor to CXL-Vector's morsel-driven batching, which applies the same principle across the DRAM/CXL tier boundary.
+**Cache-aware query batching:** partitions m queries × n data vectors into blocks of size s fitting L3 cache. Achieves 1.5–2.7× over Faiss by reusing database vectors across queries. This is a useful CPU-local precedent for batch-oriented ANN execution.
 
-**SIMD auto-selection:** Milvus detects available SIMD extensions at runtime and binds function pointers accordingly. CXL-Vector similarly benefits from AVX512 for SIMD distance computation in the coarse routing stage.
+**SIMD auto-selection:** Milvus detects available SIMD extensions at runtime and binds function pointers accordingly.
 
 ## Scope and Limitations
 
-- Supports dynamic updates; CXL-Vector is explicitly read-only (serving runtime only).
+- Supports dynamic updates.
 - Assumes data fits in distributed DRAM across multiple nodes; does not address CXL memory tiers.
-- Full DBMS with query optimization, scheduling, concurrency — CXL-Vector is a narrower serving primitive.
+- Full DBMS with query optimization, scheduling, concurrency.
 
-## Relation to CXL-Vector
+## Relation to ANN Systems
 
-- Milvus is the **canonical production vector database reference** for related work. CXL-Vector should be positioned as a CXL-aware serving runtime layer, not a full database.
-- Milvus shows what a complete system looks like when built on FAISS+HNSW; CXL-Vector addresses the orthogonal question of what happens when the index exceeds DRAM.
-- Milvus cache-aware batching is the motivating CPU-side precedent for CXL-Vector's morsel-driven batch design.
+- Milvus is the **canonical production vector database reference** for related work.
+- Milvus shows what a complete system looks like when built on FAISS+HNSW.
+- Milvus cache-aware batching is a useful CPU-side precedent for batch-oriented vector search.

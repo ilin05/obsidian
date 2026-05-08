@@ -10,7 +10,7 @@ tags:
   - ssd
 source_count: 1
 sources:
-  - raw/DiskANN.pdf
+  - raw/sources/papers/diskann-2019.pdf
 related:
   - diskann-2019
   - hnsw
@@ -38,4 +38,3 @@ DiskANN is an SSD-resident billion-scale ANN system that combines the Vamana gra
 - [NSG](nsg.md)
 - [Second-tier Memory for Vector Search](../topics/second-tier-memory-for-vector-search.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

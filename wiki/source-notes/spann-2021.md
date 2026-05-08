@@ -59,25 +59,25 @@ SPANN is a memory-disk hybrid IVF (inverted index) system that achieves high rec
 
 ## DRAM+SSD vs DRAM+CXL Comparison
 
-SPANN is the critical comparison point for CXL-Vector:
+SPANN is a critical comparison point for CXL-aware ANN systems:
 
-| Axis | SPANN | CXL-Vector |
+| Axis | SPANN | CXL-memory ANN design |
 |---|---|---|
 | Storage tier | SSD (high latency, sequential-friendly) | CXL (lower latency, random-access tolerant) |
-| Index coarse stage | IVF centroids in DRAM | HNSW graph metadata in DRAM |
-| Fine stage | full vectors from SSD posting lists | full vectors from CXL memory |
-| Pruning | query-aware dynamic pruning | bounded rerank + patience termination |
-| Graph structure | inverted index (flat clustering) | HNSW hierarchy |
-| Update support | offline (no online updates described) | read-only serving runtime |
+| Index coarse stage | IVF centroids in DRAM | DRAM-local routing or cached routing state |
+| Fine stage | full vectors from SSD posting lists | fine-grained CXL memory reads |
+| Pruning | query-aware dynamic pruning | bound or schedule the expensive second-tier stage |
+| Graph structure | inverted index (flat clustering) | graph or hybrid indexes may be practical |
+| Update support | offline (no online updates described) | depends on target system |
 
-## Relevance to CXL-Vector
+## Relevance to Future CXL ANN Work
 
-- SPANN is the mandatory comparison baseline: it is the dominant DRAM+SSD approach and the state of the art before CXL enters the picture.
-- The core design argument for CXL-Vector must address: "why CXL over SSD?" — CXL offers lower random-access latency and finer granularity, enabling graph traversal (HNSW) that would be prohibitive on SSD.
-- SPANN's posting-list approach (coarse navigation + remote fine-grained fetch) is structurally similar to CXL-Vector's coarse routing + remote rerank — both systems separate the "find candidates" stage from the "verify candidates" stage.
-- SPANN's posting list length limitation directly mirrors CXL-Vector's bounded rerank: both cap the size of the expensive remote-access stage.
+- SPANN is the dominant DRAM+SSD approach and a key baseline before CXL enters the picture.
+- Any CXL ANN design must address "why CXL over SSD?": CXL offers lower random-access latency and finer granularity, while SSD favors sequential reads.
+- SPANN's posting-list approach separates the "find candidates" stage from the "verify candidates" stage, a pattern shared by many coarse-to-exact systems.
+- SPANN's posting-list length limitation is an example of capping the size of the expensive remote-access stage.
 
 ## Open Questions
 
-- At what dataset scale and hardware cost does CXL-Vector's HNSW graph approach outperform SPANN's IVF approach?
-- Can SPANN-style dynamic pruning be ported to CXL-Vector's morsel-driven batch path?
+- At what dataset scale and hardware cost does a CXL-memory approach outperform SPANN's IVF-on-SSD approach?
+- Can SPANN-style dynamic pruning be ported to graph or hybrid indexes on newer memory tiers?

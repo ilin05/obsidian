@@ -11,7 +11,7 @@ tags:
   - early-termination
 source_count: 1
 sources:
-  - raw/patience.pdf
+  - raw/sources/papers/patience-in-proximity-2025.pdf
 related:
   - patience-in-proximity-2025
   - hnsw
@@ -35,4 +35,3 @@ Patience in Proximity is an HNSW traversal heuristic that introduces saturation-
 - [Patience in Proximity Source Note](../source-notes/patience-in-proximity-2025.md)
 - [HNSW](hnsw.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

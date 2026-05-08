@@ -11,7 +11,7 @@ tags:
   - hnsw
 source_count: 1
 sources:
-  - raw/Efficient Vector Search on Disaggregated Memory with d-HNSW.pdf
+  - raw/sources/papers/d-hnsw-2025.pdf
 related:
   - d-hnsw
   - hnsw
@@ -48,4 +48,3 @@ This paper proposes d-HNSW, an RDMA-based disaggregated-memory vector search sys
 - [HNSW](../entities/hnsw.md)
 - [Disaggregated Memory Vector Search](../topics/disaggregated-memory-vector-search.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

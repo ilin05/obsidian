@@ -67,25 +67,10 @@ This file is the append-only chronological history of wiki operations.
 - Working synthesis: this source strengthens the "lightweight runtime heuristics on top of HNSW" lane, complementary to system-level accelerations like ANSMET and disaggregated-memory serving.
 - Open questions: how robust patience thresholds are across datasets, and whether this heuristic composes cleanly with DiskANN/HNSW production variants under strict recall targets.
 
-## [2026-04-08 18:55] ingest | CXL-Vector project docs and morsel scheduling lineage
-
-- Ingested project-authored sources from `raw/`: `APP_FLOW.md`, `BACKEND_STRUCTURE.md`, `CXL_HNSW_CODE_ARCHITECTURE_ANALYSIS copy.md`, `CXL.md`, `DATA_LAYOUT_PROGRESS.md`, `MORSEL_ARCHITECTURE.md`, `PRD.md`, `TECH_STACK.md`, and `morsel.pdf`.
-- Added nine source notes under `wiki/source-notes/` to capture scope, architecture, flow, CXL assumptions, layout, morsel scheduling, implementation stack, thesis-style system analysis, and the original morsel-driven parallelism paper.
-- Added two entity pages: `wiki/entities/cxl-vector.md` and `wiki/entities/morsel-driven-parallelism.md`.
-- Added one overview page: `wiki/overview/cxl-vector-project-overview.md`.
-- Added three project topics: `wiki/topics/cxl-hnsw-runtime-design.md`, `wiki/topics/runtime-layout-and-persistence.md`, and `wiki/topics/morsel-driven-batched-hnsw-search.md`.
-- Added one durable synthesis page: `wiki/analyses/cxl-vector-thesis-positioning.md` to preserve paper-facing wording constraints, contribution boundary, and cross-document tensions.
-- Updated `wiki/topics/approximate-nearest-neighbor-search.md`, `wiki/topics/disaggregated-memory-vector-search.md`, and `wiki/topics/cxl-disaggregated-memory-systems.md` so the project is integrated into the broader ANN/CXL branch.
-- Updated `index.md` so the new overview/topic/entity/source-note/analysis pages are reachable from root navigation.
-- Performed a minimal implementation-grounding pass by verifying that the key module directories and cited test paths under `/Users/qinjianwu/CXL-Vector` exist.
-- Working synthesis: the project is best framed as a CXL-aware, read-only HNSW serving runtime whose thesis core is runtime layout conversion plus batched coarse-to-exact execution under remote-memory constraints.
-- Open questions: align wording between conservative scope documents and stronger internal analysis, and resolve exactly how upper-layer routing should be described across single-query and batch paths.
-
 ## [2026-04-10 00:00] refactor | Tidy raw/ directory structure
 
 - Reorganized all 26 flat files from `raw/` root into three logical subdirectories under `raw/sources/`.
 - Moved 16 academic PDFs to `raw/sources/papers/` with slug names matching wiki source-notes (e.g., `ansmet-2025.pdf`, `hnsw-2016.pdf`).
-- Moved 8 CXL-Vector internal project MDs to `raw/sources/project/` with snake-case names (e.g., `app-flow.md`, `prd.md`).
 - Moved 2 hand-written notes/summaries to `raw/sources/notes/` (`turboquant-notes.md`, `polarcxlmem-notes.md`).
 - Fixed malformed filenames: removed trailing space/dash from `ANSMET- .pdf`, renamed all-caps MDs to snake-case, corrected Chinese filename encoding for TurboQuant CN summary.
 - `raw/inbox/`, `raw/sources/`, and `raw/assets/` are now empty of misplaced files; all content is properly nested.
@@ -115,40 +100,40 @@ Ingested 7 new sources from `raw/inbox/` (2 FAISS papers counted as one entity):
 
 **index.md updated:** 5 new entity entries, 7 new source note entries added to navigation.
 
-**Working synthesis:** The vault now has a complete related-work baseline coverage for the CXL-Vector paper. Key relationship: FAISS (in-DRAM library baseline) → ScaNN (best in-DRAM quantized ANN) → SPANN (best DRAM+SSD system, deployed at Bing scale) → CXL-Vector (DRAM+CXL, graph-based, finer-grained access). The CXL memory characterization paper (Micro 2023) provides the empirical hardware grounding: true CXL at 29–41ns justifies HNSW graph traversal on CXL (unlike SSD where only sequential IVF posting lists are feasible).
+**Working synthesis:** The vault now has complete baseline coverage for the ANN systems branch. Key relationship: FAISS (in-DRAM library baseline) → ScaNN (in-DRAM quantized ANN) → SPANN (DRAM+SSD system, deployed at Bing scale) → CXL/RDMA disaggregated-memory systems.
 
-**Open questions:** (1) At what scale/hardware budget does CXL-Vector outperform SPANN? (2) Can score-aware quantization improve CXL-Vector's SQ8 coarse routing? (3) What billion-scale benchmark protocol should CXL-Vector use given ANN-Benchmarks is in-memory only?
+**Open questions:** (1) At what scale/hardware budget do CXL/RDMA memory systems outperform SPANN? (2) Can score-aware quantization improve compressed coarse routing? (3) What billion-scale benchmark protocol should be used given ANN-Benchmarks is in-memory only?
 
-## [2026-04-10 02:00] update | Hardware configuration — confirmed NUMA topology and ISA
+## [2026-05-08 11:42] ingest | GustANN, FusionANNS, and billion-scale vector search literature map
 
-Updated wiki with confirmed hardware specification from lscpu output. Key facts:
+Processed `raw/sources/papers/gustann-2025.pdf` and `raw/sources/papers/fusionanns-2025.pdf` into source notes and entity pages. Updated the ANN and second-tier-memory topic pages to account for SSD+GPU systems as adjacent related work. Created `wiki/analyses/billion-scale-vector-search-literature-map.md` with external paper leads not yet ingested, including RUMMY, SmartANNS, Starling, BANG, SPFresh, VBASE, GRIP, iDEC, ParANN, and iQAN.
 
-- **CPU**: 2× Intel Xeon Gold 5520+ (Emerald Rapids, 5th Gen Xeon, Family 6 Model 207 Stepping 2)
-- **Cores/threads**: 2×28 cores, 112 logical threads (SMT enabled); experiments use 56 threads on node1
-- **NUMA**: node1 = socket 1 CPUs (28–55) + DRAM + experiment threads; node3 = CXL device (memory-only, no CPUs)
-- **ISA**: AVX-512F/BW/VL/VNNI/VBMI2, AVX-VNNI, AMX-INT8/BF16 — `level0_use_vnni=true` is hardware-native
-- **Cache**: L2 = 2 MiB/core (112 MiB total); L3 = ~52.5 MiB/socket (105 MiB total)
-- **CXL placement**: `vec_segment_` 488 MB VMA bound to node3 via `mmap + mbind`; DRAM segments on node1
+Touched pages: `wiki/source-notes/gustann-2025.md`, `wiki/source-notes/fusionanns-2025.md`, `wiki/entities/gustann.md`, `wiki/entities/fusionanns.md`, `wiki/topics/approximate-nearest-neighbor-search.md`, `wiki/topics/second-tier-memory-for-vector-search.md`, `wiki/analyses/billion-scale-vector-search-literature-map.md`, `index.md`.
 
-**Pages updated:**
-- `wiki/source-notes/cxl-vector-tech-stack-2026.md`: new "Confirmed Hardware Platform" section with full CPU/ISA/cache/NUMA tables
-- `wiki/entities/cxl-vector.md`: new "Hardware Platform" section with condensed spec and NUMA role description
-- `wiki/source-notes/cxl-hnsw-code-architecture-analysis-2026.md`: new "Hardware Configuration" table added; source path corrected to `raw/sources/project/`
-- Source paths in entity frontmatter corrected to reflect reorganized `raw/sources/project/` structure
+Unresolved questions: decide which SSD+GPU papers should be fully ingested next, and whether the literature map should include a taxonomy figure separating DRAM-only, SSD-only, SSD+GPU, SmartSSD/NDP, CXL, and RDMA-disaggregated systems.
 
-## [2026-05-08 11:20] refactor | Refresh CXL-Vector wiki from latest paper docs
+## [2026-05-08 11:52] refactor | Remove stale project cluster and broken local references
 
-- Rebuilt the CXL-Vector knowledge cluster from the latest root-level documents: `vldb-paper-outline.md`, `vldb-paper-intro-draft.md`, and `cross-query-rerank-coalescing-plan.md`.
-- Deleted stale project-topic pages that represented the older CXL-Vector ingestion: `wiki/topics/morsel-driven-batched-hnsw-search.md` and `wiki/topics/runtime-layout-and-persistence.md`.
-- Added refreshed durable pages:
-  - `wiki/overview/cxl-vector-vldb-paper.md`
-  - `wiki/entities/cxl-vector.md`
-  - `wiki/topics/cxl-vector-commodity-cxl-hnsw-serving.md`
-  - `wiki/topics/cross-query-rerank-coalescing.md`
-  - `wiki/analyses/cxl-vector-vldb-positioning.md`
-- Added source notes for the latest working docs:
-  - `wiki/source-notes/cxl-vector-vldb-outline-2026.md`
-  - `wiki/source-notes/cxl-vector-introduction-draft-2026.md`
-  - `wiki/source-notes/cross-query-rerank-coalescing-plan-2026.md`
-- Updated `index.md` and the broader ANN/CXL topic pages so navigation points to the refreshed paper-driven CXL-Vector structure.
-- Current synthesis: CXL-Vector should now be treated as a commodity-CXL VLDB paper project whose strongest framing is "PCIe bandwidth as a first-class scheduling resource for HNSW serving." Cross-query rerank coalescing is a seed-stage mechanism pending overlap-rate measurement.
+Removed stale project-specific CXL ANN pages and root drafts from the maintained vault graph. Updated ANN, CXL, SSD/GPU, benchmark, and source-note pages to avoid links to deleted project pages. Normalized stale raw source paths to current `raw/sources/` locations and removed missing TurboQuant image links that created broken Obsidian graph nodes.
+
+## [2026-05-08 12:12] ingest | RUMMY, SmartANNS, VBASE, Starling, BANG, and SPFresh
+
+Downloaded and ingested six relevant billion-scale vector search papers not previously present in the repo: `raw/sources/papers/rummy-2024.pdf`, `raw/sources/papers/smartanns-2024.pdf`, `raw/sources/papers/vbase-2023.pdf`, `raw/sources/papers/starling-2024.pdf`, `raw/sources/papers/bang-2024.pdf`, and `raw/sources/papers/spfresh-2023.pdf`.
+
+Created source notes: `wiki/source-notes/rummy-2024.md`, `wiki/source-notes/smartanns-2024.md`, `wiki/source-notes/vbase-2023.md`, `wiki/source-notes/starling-2024.md`, `wiki/source-notes/bang-2024.md`, and `wiki/source-notes/spfresh-2023.md`.
+
+Created entity pages: `wiki/entities/rummy.md`, `wiki/entities/smartanns.md`, `wiki/entities/vbase.md`, `wiki/entities/starling.md`, `wiki/entities/bang.md`, and `wiki/entities/spfresh.md`.
+
+Updated synthesis pages: `wiki/topics/approximate-nearest-neighbor-search.md`, `wiki/topics/second-tier-memory-for-vector-search.md`, and `wiki/analyses/billion-scale-vector-search-literature-map.md`. Updated `index.md` for navigation.
+
+Working synthesis: the billion-scale vector search branch now covers GPU/host-memory execution, SmartSSD/NDP, vector-relational query semantics, segment-level disk graph layout, single-GPU graph search, and fresh-update maintenance in addition to the existing DiskANN/SPANN/GustANN/FusionANNS/CXL/RDMA coverage.
+
+Unresolved questions: remaining candidate papers for future ingest are GRIP, iDEC, ParANN/ParlayANN, and iQAN; decide whether these should be source-note depth or literature-map-only references.
+
+## [2026-05-08 12:21] refactor | Move inbox papers to organized sources
+
+Moved the remaining inbox PDFs into `raw/sources/papers/`: `raw/sources/papers/gustann-2025.pdf` and `raw/sources/papers/fusionanns-2025.pdf`.
+
+Updated source frontmatter references in GustANN/FusionANNS source notes, entity pages, topic pages, and the billion-scale literature map so they no longer point to `raw/inbox/`.
+
+`raw/inbox/` now only retains `.gitkeep`.

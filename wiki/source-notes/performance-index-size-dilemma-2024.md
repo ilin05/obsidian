@@ -11,7 +11,7 @@ tags:
   - second-tier-memory
 source_count: 1
 sources:
-  - raw/Characterizing the Dilemma of Performance and Index Size in Billion-Scale Vector Search .pdf
+  - raw/sources/papers/performance-index-size-dilemma-2024.pdf
 related:
   - second-tier-memory-for-vector-search
   - disaggregated-memory-vector-search

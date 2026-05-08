@@ -20,7 +20,6 @@ related:
   - approximate-nearest-neighbor-search
   - second-tier-memory-for-vector-search
   - disaggregated-memory-vector-search
-  - cxl-vector
 confidence: high
 ---
 
@@ -58,22 +57,21 @@ SPANN is a memory-disk hybrid ANN system built on an inverted index (IVF) struct
 - 10% of DiskANN's memory consumption at same recall level.
 - VQ capacity (vectors·queries/second) best among tested systems.
 
-## Design Contrast with CXL-Vector
+## Design Contrast With CXL Memory
 
-| Axis | SPANN | CXL-Vector |
+| Axis | SPANN | CXL-memory ANN design |
 |---|---|---|
-| Second tier | SSD (100–200µs, sequential) | CXL (29–41ns, random-tolerant) |
-| Index type | Inverted index (IVF) | Graph (HNSW) |
-| Coarse stage | Centroid scan (SPTAG) | Graph traversal in DRAM |
-| Fine stage | Sequential SSD read | Random CXL fetch (bounded) |
-| Graph quality | Flat IVF clusters | HNSW hierarchical graph |
-| Update model | Static / offline | Read-only serving runtime |
+| Second tier | SSD (100-200us, sequential) | CXL (tens to low hundreds of ns depending on hardware) |
+| Index type | Inverted index (IVF) | Often graph or hybrid indexes |
+| Coarse stage | Centroid scan (SPTAG) | DRAM-local routing or cached routing state |
+| Fine stage | Sequential SSD read | Fine-grained memory reads |
+| Access pressure | page/list-oriented | byte-addressable but bandwidth-sensitive |
+| Design pressure | sequentialize and prune SSD I/O | control random access and bandwidth pressure |
 
-The core argument for CXL-Vector over SPANN: CXL's lower random-access latency (29ns vs 100+µs) enables HNSW-quality graph traversal that would be prohibitive on SSD. SPANN uses IVF because SSDs favor sequential reads; CXL-Vector can afford the irregular access pattern of HNSW.
+The core design contrast: CXL's lower random-access latency can make graph-style traversal more plausible than on SSD, while SPANN uses IVF because SSDs favor coarse sequential reads.
 
-## Relation to CXL-Vector
+## Relation to Future CXL ANN Work
 
-- SPANN is the **primary comparison baseline** for CXL-Vector. Any paper on CXL-aware ANN must show where CXL-Vector stands relative to SPANN.
+- SPANN is a primary comparison point for any CXL-aware ANN system.
 - Both systems separate coarse candidate selection (DRAM-resident) from fine-grained verification (second-tier-resident).
-- SPANN's query-aware dynamic pruning parallels CXL-Vector's bounded rerank + patience termination.
-- The DRAM+SSD → DRAM+CXL transition is the central motivation for CXL-Vector's existence.
+- SPANN's query-aware dynamic pruning is relevant to any system with an expensive second-tier verification stage.

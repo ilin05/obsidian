@@ -10,7 +10,7 @@ tags:
   - graph-index
 source_count: 1
 sources:
-  - raw/NSG.pdf
+  - raw/sources/papers/nsg-2019.pdf
 related:
   - nsg-2019
   - hnsw
@@ -36,4 +36,3 @@ Navigating Spreading-out Graph (NSG) is a practical graph index for ANN search, 
 - [HNSW](hnsw.md)
 - [DiskANN](diskann.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
-

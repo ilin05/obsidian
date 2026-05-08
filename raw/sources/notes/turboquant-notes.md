@@ -192,11 +192,7 @@ The paper evaluates TurboQuant on LongBench / LongBench-E using long-context gen
 
 The paper's interpretation is that TurboQuant remains competitive with full precision even at very aggressive KV compression ratios.
 
-![Figure 4 and LongBench tables](assets/turboquant-figure-4.png)
-
 Caption: Figure 4 shows the paper's "Needle-In-A-Haystack" result, where TurboQuant matches the full-precision baseline visually while several compressed baselines degrade more clearly.
-
-![Table 1 and Table 2](assets/turboquant-tables-1-2.png)
 
 Caption: Page 20 contains the headline LongBench table and the quantization-time comparison table used by the paper to support both quality and efficiency claims.
 
@@ -215,8 +211,6 @@ For retrieval, the paper evaluates TurboQuant on DBpedia-based OpenAI embedding 
 | TurboQuant | 0.0007 s | 0.0013 s | 0.0021 s |
 
 The recall curves in Figure 5 are used by the paper to argue that TurboQuant also gives stronger recall than PQ and RaBitQ under the same bit budget.
-
-![Figure 5 recall curves](assets/turboquant-figure-5.png)
 
 Caption: Figure 5 shows the reported recall@1@k curves across three datasets. In the paper's plots, TurboQuant stays above PQ and RaBitQ for both 2-bit and 4-bit settings.
 

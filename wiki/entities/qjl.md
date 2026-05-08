@@ -11,7 +11,7 @@ tags:
   - llm-inference
 source_count: 1
 sources:
-  - raw/QJL.pdf
+  - raw/sources/papers/qjl-2024.pdf
 related:
   - qjl-2024
   - turboquant

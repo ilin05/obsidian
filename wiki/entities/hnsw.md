@@ -10,8 +10,8 @@ tags:
   - graph-index
 source_count: 2
 sources:
-  - raw/HNSW.pdf
-  - raw/patience.pdf
+  - raw/sources/papers/hnsw-2016.pdf
+  - raw/sources/papers/patience-in-proximity-2025.pdf
 related:
   - hnsw-2016
   - patience-in-proximity

@@ -11,8 +11,8 @@ tags:
   - disaggregated-memory
 source_count: 2
 sources:
-  - raw/Unlocking the Potential of CXL for Disaggregated Memory in CloudNative Databases.pdf
-  - raw/Unlocking the Potential of CXL for Disaggregated Memory in Cloud-Native Databases.md
+  - raw/sources/papers/polarcxlmem-2025.pdf
+  - raw/sources/notes/polarcxlmem-notes.md
 related:
   - polarcxlmem-2025
   - cxl-disaggregated-memory-systems
@@ -34,4 +34,3 @@ PolarCXLMem is a CXL-switch-based disaggregated-memory design for cloud-native d
 
 - [PolarCXLMem Source Note](../source-notes/polarcxlmem-2025.md)
 - [CXL Disaggregated Memory Systems](../topics/cxl-disaggregated-memory-systems.md)
-

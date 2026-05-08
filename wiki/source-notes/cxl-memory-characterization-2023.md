@@ -16,7 +16,6 @@ sources:
   - raw/sources/papers/cxl-memory-characterization-2023.pdf
 related:
   - cxl-disaggregated-memory-systems
-  - cxl-vector-commodity-cxl-hnsw-serving
   - disaggregated-memory-vector-search
 confidence: high
 ---
@@ -92,18 +91,18 @@ Mechanisms:
 - Improves throughput by up to 24% vs default NUMA page allocation.
 - Orthogonal and complementary to TPP (transparent page placement).
 
-## Relevance to CXL-Vector
+## Relevance to CXL ANN Systems
 
-This paper is the **canonical empirical grounding** for CXL-Vector's core problem framing:
+This paper is canonical empirical grounding for CXL-memory system design:
 
-1. **HNSW traversal is latency-sensitive random access** — the Redis result directly predicts that naively placing HNSW raw vectors in CXL will cause latency blowup, motivating CXL-Vector's design.
+1. **HNSW traversal is latency-sensitive random access** — the Redis result suggests that naively placing random-access ANN state in CXL can cause latency blowup.
 2. **CXL latency is not SSD latency** — true CXL at 29–41ns is dramatically lower than SSD (100–200µs), justifying a different algorithm design from DiskANN/SPANN.
-3. **Bandwidth expansion** — CXL-Vector can cite CXL's bandwidth expansion capability to justify placing raw vectors (read once per rerank, sequential-ish) in CXL while keeping graph metadata (random access) in DRAM.
+3. **Bandwidth expansion** — CXL's bandwidth expansion capability can justify placing cold or verification-stage data in CXL while keeping the hottest metadata in DRAM.
 4. **Concrete latency numbers** — 29–41ns for CXL-A gives the quantitative grounding for why bounded rerank depth matters (each rerank fetch ≈ N × 41ns).
-5. **SNC mode LLC interaction** — explains why CXL access from CXL-Vector's multithreaded workers may have different effective cache behavior than single-threaded baseline measurements.
+5. **SNC mode LLC interaction** — explains why CXL access from multithreaded workers may have different effective cache behavior than single-threaded baseline measurements.
 
 ## Open Questions
 
-- How do CXL-Vector's irregular HNSW access patterns interact with the CXL controller's request queuing at high thread counts?
-- Does CAPTION-like adaptive page placement have a role in CXL-Vector's future memory management?
+- How do irregular ANN access patterns interact with the CXL controller's request queuing at high thread counts?
+- Does CAPTION-like adaptive page placement have a role in future ANN memory management?
 - How much does the 29ns CXL-A latency increase under the multithreaded memory pressure of a saturated HNSW serving workload?
