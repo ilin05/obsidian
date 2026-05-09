@@ -217,3 +217,19 @@ Created root-level general ANNS operating guides: `CACHE.md`, `reviewer.md`, and
 Updated `index.md` operating-guide labels from CXL-Vector-specific to general ANNS-system-specific.
 
 Unresolved questions: if a specific ANNS paper repository has local implementation context, add a short pointer from `CACHE.md` to that paper-local file.
+
+## [2026-05-09 12:36] refactor | ANNS research figure drawing guide and skill
+
+Created a figure-drawing entry point for ANNS system paper work.
+
+Added `FIGURE_CACHE.md` as the short read path for drawing and reviewing ANNS figures. It maps common needs to concrete rendered reference pages: system architecture, data placement, query workflow, graph/algorithm intuition, recall-QPS curves, ablation/sensitivity, and hardware characterization.
+
+Created `wiki/analyses/anns-research-figure-design-guide.md` with a full taxonomy of ANNS paper figures. It separates system figures from experiment figures, summarizes visual patterns across HNSW/NSG/PQ/FAISS, DiskANN/SPANN/Starling/SPFresh, BANG/RUMMY/GustANN/FusionANNS/SVFusion/SmartANNS, CXL-ANNS/CXL memory characterization, ANN-Benchmarks, and Graph-Based ANNS Survey.
+
+Rendered 25 representative PDF pages into `wiki/assets/figure-guide/` for quick visual reference. These include architecture/workflow pages, graph and quantization intuition pages, recall-QPS/Pareto pages, ablation/sensitivity pages, and hardware characterization pages.
+
+Created a vault-local skill at `skills/anns-research-figure-drawing/SKILL.md` for future agents drawing or reviewing ANNS research figures.
+
+Updated `CACHE.md` and `index.md` so the new figure cache, figure guide, and skill are discoverable.
+
+Unresolved questions: future work should add cropped single-figure assets and paper-local figure templates once a concrete target paper repository is available.

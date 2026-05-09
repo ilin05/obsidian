@@ -7,6 +7,8 @@ This file is the primary catalog for the vault's durable wiki content.
 - [ANNS System Agent Cache](CACHE.md) - Short entry point for agents working on ANNS system papers.
 - [ANNS System Reviewer Guide](reviewer.md) - Reviewer protocol for applying the VLDB section-review skill with this ANNS knowledge base.
 - [ANNS System Writer Guide](writer.md) - Writer protocol for turning reviews into conservative ANNS paper edits.
+- [ANNS Figure Drawing Cache](FIGURE_CACHE.md) - Fast entry point for drawing and reviewing ANNS research figures.
+- [ANNS Figure Drawing Skill](skills/anns-research-figure-drawing/SKILL.md) - Vault-local skill for ANNS system, algorithm, and experiment figures.
 
 ## Overview
 
@@ -125,3 +127,4 @@ This file is the primary catalog for the vault's durable wiki content.
 - [Billion-Scale Vector Search Literature Map](wiki/analyses/billion-scale-vector-search-literature-map.md) - Research map of covered and not-yet-ingested billion-scale vector search systems.
 - [Graph-Theoretic ANN Inbox Candidates](wiki/analyses/graph-theoretic-ann-inbox-candidates.md) - Candidate queue and rationale for proximity/RNG/MRNG/small-world graph papers, now including the first ingested batch.
 - [ANN Benchmarking And Graph Coverage Gaps](wiki/analyses/ann-benchmarking-and-graph-coverage-gaps.md) - Gap analysis and inbox candidate queue seeded by ANN-Benchmarks and the graph-based ANNS survey.
+- [ANNS Research Figure Design Guide](wiki/analyses/anns-research-figure-design-guide.md) - Figure-type taxonomy, representative screenshot atlas, and review workflow for ANNS research figures.

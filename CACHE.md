@@ -9,6 +9,7 @@ Shortest read path for agents working on any ANNS system paper.
 3. [ANN Benchmarking Methodology](wiki/topics/ann-benchmarking-methodology.md) - required evaluation rules.
 4. [Graph-Based ANNS Survey 2021](wiki/source-notes/graph-based-anns-survey-2021.md) - graph taxonomy and components.
 5. [Proximity Graph Theory for ANN](wiki/topics/proximity-graph-theory-for-ann.md) - graph searchability, RNG/MRNG/SSG/RNSG.
+6. [ANNS Figure Drawing Cache](FIGURE_CACHE.md) - quick entry for drawing and reviewing paper figures.
 
 ## Pick By Paper Claim
 
@@ -32,3 +33,4 @@ Shortest read path for agents working on any ANNS system paper.
 
 - Review guide: [reviewer.md](reviewer.md)
 - Writer guide: [writer.md](writer.md)
+- Figure guide: [FIGURE_CACHE.md](FIGURE_CACHE.md)
