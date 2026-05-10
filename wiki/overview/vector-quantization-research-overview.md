@@ -3,21 +3,33 @@ id: vector-quantization-research-overview
 type: overview
 status: active
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-05-10
 tags:
   - overview
   - vector-quantization
   - kv-cache
   - retrieval
-source_count: 3
+source_count: 13
 sources:
   - raw/sources/papers/qjl-2024.pdf
   - raw/sources/papers/product-quantization-2011.pdf
   - raw/sources/papers/turboquant-2025.pdf
+  - raw/sources/papers/faiss-library-2025.pdf
+  - raw/sources/papers/scann-2020.pdf
+  - raw/sources/papers/rabitq-extension-2024.pdf
+  - raw/sources/papers/low-precision-quantization-knn-2021.pdf
+  - raw/sources/papers/norm-explicit-quantization-mips-2020.pdf
+  - raw/sources/papers/quantization-to-speedup-ann-2024.pdf
+  - raw/sources/papers/symphonyqg-2024.pdf
+  - raw/sources/papers/aqr-hnsw-2026.pdf
+  - raw/sources/papers/quantization-enhanced-hnsw-lavq-2025.pdf
+  - raw/sources/papers/information-theoretic-binarization-vector-search-2026.pdf
 related:
   - vector-quantization
   - kv-cache-quantization
   - approximate-nearest-neighbor-search
+  - scalar-and-binary-quantization-for-ann
+  - simd-and-vectorization-for-ann-systems
   - qjl
   - product-quantization
   - turboquant
@@ -39,6 +51,8 @@ This vault now has an initial cluster around vector quantization for two adjacen
 - [RaBitQ](../entities/rabitq.md) adds a more theory-driven ANN path: randomized, data-oblivious quantization with strong inner-product error guarantees, extended here to multi-bit codes and practical high-recall search.
 - [QJL](../entities/qjl.md) is the most specialized source in the cluster: it targets KV-cache quantization, preserves inner products via a quantized JL sketch, and argues that removing quantization metadata overhead is a major win.
 - [TurboQuant](../entities/turboquant.md) is the most ambitious synthesis source: it aims for near-optimal distortion rates, uses rotation plus scalar quantization for MSE, and then applies QJL to the residual for unbiased inner products.
+- [Scalar and Binary Quantization for ANN](../topics/scalar-and-binary-quantization-for-ann.md) adds the systems branch: SQ/int8, binary codes, norm-explicit MIPS, and scalar-quantized HNSW-style traversal.
+- [SIMD and Vectorization for ANN Systems](../topics/simd-and-vectorization-for-ann-systems.md) adds the execution branch: PQ/ADC FastScan, Quicker ADC, compressed-ID decoding, and graph-plus-quantization layout.
 
 ## Emerging Thesis
 
@@ -47,6 +61,7 @@ The cluster suggests a movement from offline codebook-heavy quantization toward 
 - retrieval wants compact searchable codes with strong recall
 - attention wants inner-product fidelity with minimal runtime and metadata overhead
 - newer methods try either to specialize harder for retrieval efficiency or to unify retrieval and inference under one geometric quantization story
+- systems-oriented methods increasingly treat quantization as an execution path: stored code, distance kernel, SIMD layout, graph traversal, and reranking policy have to fit together
 
 ## Open Questions
 
@@ -54,9 +69,13 @@ The cluster suggests a movement from offline codebook-heavy quantization toward 
 - Where does RaBitQ sit empirically versus TurboQuant on ANN workloads once both are engineered well?
 - Does TurboQuant beat plain QJL on KV-cache tasks at equal latency and memory budgets, or is the best choice task-specific?
 - How much of the practical win in modern systems comes from better distortion and how much comes from lower metadata and indexing overhead?
+- For ANN, when is scalar quantization enough, and when do PQ/RaBitQ-style estimators or exact reranking become necessary?
+- Which claims require matched-recall system benchmarks rather than standalone quantization-error plots?
 
 ## Entry Points
 
 - [Vector Quantization](../topics/vector-quantization.md)
+- [Scalar and Binary Quantization for ANN](../topics/scalar-and-binary-quantization-for-ann.md)
+- [SIMD and Vectorization for ANN Systems](../topics/simd-and-vectorization-for-ann-systems.md)
 - [KV Cache Quantization](../topics/kv-cache-quantization.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)

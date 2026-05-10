@@ -3,7 +3,7 @@ id: rabitq-extension-2024
 type: source-note
 status: active
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-05-10
 tags:
   - vector-quantization
   - ann
@@ -11,11 +11,12 @@ tags:
   - rabitq
 source_count: 1
 sources:
-  - raw/sources/papers/rabitq-2024.pdf
+  - raw/sources/papers/rabitq-extension-2024.pdf
 related:
   - rabitq
   - approximate-nearest-neighbor-search
   - vector-quantization
+  - scalar-and-binary-quantization-for-ann
   - product-quantization
 confidence: high
 ---
@@ -62,3 +63,4 @@ This paper extends RaBitQ beyond its original 1-bit-per-dimension regime to supp
 - [RaBitQ](../entities/rabitq.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
 - [Vector Quantization](../topics/vector-quantization.md)
+- [Scalar and Binary Quantization for ANN](../topics/scalar-and-binary-quantization-for-ann.md)

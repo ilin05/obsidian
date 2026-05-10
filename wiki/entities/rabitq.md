@@ -3,7 +3,7 @@ id: rabitq
 type: entity
 status: active
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-05-10
 tags:
   - method
   - ann
@@ -11,11 +11,12 @@ tags:
   - rabitq
 source_count: 1
 sources:
-  - raw/sources/papers/rabitq-2024.pdf
+  - raw/sources/papers/rabitq-extension-2024.pdf
 related:
   - rabitq-extension-2024
   - approximate-nearest-neighbor-search
   - vector-quantization
+  - scalar-and-binary-quantization-for-ann
   - product-quantization
 confidence: medium
 ---
@@ -49,3 +50,4 @@ RaBitQ is a quantization family for approximate nearest-neighbor search that use
 - [RaBitQ Extension Source Note](../source-notes/rabitq-extension-2024.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
 - [Product Quantization](product-quantization.md)
+- [Scalar and Binary Quantization for ANN](../topics/scalar-and-binary-quantization-for-ann.md)

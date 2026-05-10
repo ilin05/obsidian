@@ -234,6 +234,48 @@ Updated `CACHE.md` and `index.md` so the new figure cache, figure guide, and ski
 
 Unresolved questions: future work should add cropped single-figure assets and paper-local figure templates once a concrete target paper repository is available.
 
+## [2026-05-10 18:40] ingest | SIMD and vectorization execution-layer papers
+
+Ingested three inbox PDFs and moved them into organized sources: `raw/sources/papers/simd-investments-2020.pdf`, `raw/sources/papers/fastlanes-2023.pdf`, and `raw/sources/papers/compiled-vectorized-queries-2018.pdf`.
+
+Created source notes: `wiki/source-notes/simd-investments-2020.md`, `wiki/source-notes/fastlanes-2023.md`, and `wiki/source-notes/compiled-vectorized-queries-2018.md`.
+
+Created entity pages: `wiki/entities/simd-investments.md`, `wiki/entities/fastlanes.md`, and `wiki/entities/compiled-vectorized-queries.md`.
+
+Created topic page: `wiki/topics/simd-and-vectorization-for-ann-systems.md`, connecting database SIMD/vectorized execution papers to ANN system concerns such as distance kernels, compressed scans, filtered search, cache-aware batching, and irregular graph traversal.
+
+Updated `wiki/topics/approximate-nearest-neighbor-search.md` and `index.md` so the new execution-layer branch is discoverable.
+
+Working synthesis: SIMD/vectorization should be treated as an execution-layer issue for ANN systems. Dense scans and compressed decoding are SIMD-friendly; sparse graph traversal, selection vectors, and branch-heavy filters can erase SIMD gains unless the layout and pipeline are designed for them.
+
+Unresolved questions: identify ANN-specific SIMD/vectorization papers and libraries worth downloading next, especially work on SIMDized distance kernels, SIMD compression/posting-list decoding, and CPU vector search implementations.
+
+## [2026-05-10 18:48] query | SIMD and scalar quantization inbox expansion
+
+Researched and downloaded a new `raw/inbox/` queue for ANN SIMD/vectorization and scalar/bit quantization papers.
+
+Downloaded ANN/PQ SIMD and vectorized execution candidates: `raw/inbox/pq-fast-scan-2015.pdf`, `raw/inbox/quicker-adc-2019.pdf`, `raw/inbox/rethinking-simd-vectorization-2015.pdf`, `raw/inbox/simd-posting-list-decoding-2011.pdf`, `raw/inbox/simd-compression-intersection-2014.pdf`, and `raw/inbox/stream-vbyte-2017.pdf`.
+
+Downloaded scalar/bit quantization and quantization-plus-graph candidates: `raw/inbox/rabitq-extension-2024.pdf`, `raw/inbox/low-precision-quantization-knn-2021.pdf`, `raw/inbox/norm-explicit-quantization-mips-2020.pdf`, `raw/inbox/quantization-to-speedup-ann-2024.pdf`, `raw/inbox/symphonyqg-2024.pdf`, `raw/inbox/aqr-hnsw-2026.pdf`, `raw/inbox/quantization-enhanced-hnsw-lavq-2025.pdf`, and `raw/inbox/information-theoretic-binarization-vector-search-2026.pdf`.
+
+Created `wiki/analyses/simd-scalar-quantization-inbox-candidates.md` and updated `index.md` so the next ingest pass has a prioritized queue and caveats. The strongest immediate ingest targets are PQ Fast Scan, Quicker ADC, the RaBitQ multi-bit extension, Low-Precision Quantization for KNN, and Norm-Explicit Quantization for MIPS.
+
+Unresolved questions: whether scalar quantization should become a standalone topic page after ingest, and whether the user's ANNS systems work should prioritize HNSW traversal quantization, IVF/PQ reranking quantization, or compressed raw-vector storage.
+
+## [2026-05-10 19:02] ingest | SIMD and scalar quantization inbox batch
+
+Ingested the `raw/inbox/` batch recorded in `wiki/analyses/simd-scalar-quantization-inbox-candidates.md` and moved the PDFs into `raw/sources/papers/`.
+
+Created source notes for PQ/ADC SIMD and compressed-list execution: `wiki/source-notes/pq-fast-scan-2015.md`, `wiki/source-notes/quicker-adc-2019.md`, `wiki/source-notes/rethinking-simd-vectorization-2015.md`, `wiki/source-notes/simd-based-decoding-posting-lists-2011.md`, `wiki/source-notes/simd-compression-intersection-2014.md`, and `wiki/source-notes/stream-vbyte-2017.md`.
+
+Created source notes for scalar/binary and graph-integrated quantization: `wiki/source-notes/low-precision-quantization-knn-2021.md`, `wiki/source-notes/norm-explicit-quantization-mips-2020.md`, `wiki/source-notes/quantization-to-speedup-ann-2024.md`, `wiki/source-notes/symphonyqg-2024.md`, `wiki/source-notes/aqr-hnsw-2026.md`, `wiki/source-notes/quantization-enhanced-hnsw-lavq-2025.md`, and `wiki/source-notes/information-theoretic-binarization-vector-search-2026.md`.
+
+Created entity pages for the new methods/papers and a new topic page: `wiki/topics/scalar-and-binary-quantization-for-ann.md`. Updated `wiki/topics/simd-and-vectorization-for-ann-systems.md`, `wiki/topics/vector-quantization.md`, `wiki/topics/approximate-nearest-neighbor-search.md`, `wiki/overview/vector-quantization-research-overview.md`, `wiki/entities/product-quantization.md`, `wiki/entities/rabitq.md`, `wiki/source-notes/rabitq-extension-2024.md`, `wiki/analyses/simd-scalar-quantization-inbox-candidates.md`, and `index.md`.
+
+Working synthesis: ANN quantization should now be treated as both a compression method and an execution path. PQ/ADC needs in-register lookup and layout-aware SIMD. Scalar quantization needs careful range/norm handling and can become a traversal-time distance estimator, not just a storage-saving format. Graph-plus-quantization methods need layout, graph degree, and reranking policy co-designed with the SIMD batch kernel.
+
+Unresolved questions: the mature sources are PQ Fast Scan, Quicker ADC, RaBitQ extension, Low-Precision Quantization, Norm-Explicit Quantization, and SymphonyQG. AQR-HNSW, HNSW-LAVQ, and Information-Theoretic Binarization remain low-confidence exploratory sources until independently validated.
+
 ## [2026-05-10 15:00] ingest | Gorilla and Chimp — XOR-based float compression for LVC
 
 Ingested two foundational float compression papers from `raw/inbox/` and moved them to `raw/sources/papers/`: `gorilla-2015.pdf` and `chimp-2022.pdf`.
