@@ -249,3 +249,64 @@ Updated `index.md` with the new topic and two source notes.
 Working synthesis: These two papers establish the XOR-based float compression foundation that LVC's coding layer extends from 1D time series to graph-guided high-dimensional vector differential encoding. Gorilla is the progenitor; Chimp provides the critical empirical insight (leading zeros dominate, trailing zeros don't) that LVC's per-dimension state machine design exploits. Chimp128's hash-based multi-predecessor search is the conceptual precursor to LVC's graph-guided BFS reference selection.
 
 Unresolved questions: remaining inbox papers in this cluster (Elf, ALP, DeXOR, Camel) form the third-generation codecs that LVC directly implements — these are needed to complete the float compression lineage picture.
+
+## [2026-05-10 16:00] ingest | Elf, ALP, Camel, DeXOR — completing the float compression lineage
+
+Ingested four second-phase float compression papers from `raw/inbox/` and moved them to `raw/sources/papers/`: `elf-2023.pdf`, `alp-2023.pdf`, `camel-2024.pdf`, and `dexor-2025.pdf`.
+
+Created source notes:
+- `wiki/source-notes/elf-2023.md` — PVLDB 2023; erasing-based float compression: zero out trailing mantissa bits before XOR to force trailing zeros, lossless restoration via bounded error addition.
+- `wiki/source-notes/alp-2023.md` — SIGMOD 2023; vectorized adaptive encoding: per-1024-value decimal→int or front-bits, SIMD-friendly, 10–100× faster than Chimp/Elf.
+- `wiki/source-notes/camel-2024.md` — SIGMOD 2024; integer-decimal separation with stable-trailing-zero decimal XOR, plus index for querying compressed data.
+- `wiki/source-notes/dexor-2025.md` — arXiv 2025; decimal XOR with longest common prefix extraction and suffix scaling, unifying Elf's manipulation and Camel's decimal awareness.
+
+Revised existing pages to remove project-specific framing:
+- `wiki/source-notes/gorilla-2015.md`: replaced "Relevance to LVC" with "Significance" section; revised Limits to be paper-focused.
+- `wiki/source-notes/chimp-2022.md`: same treatment — field-level significance and limits, no project-specific connections.
+- `wiki/topics/lossless-floating-point-compression.md`: complete rewrite. Now organized in three phases (Binary XOR → Active Manipulation → Decimal-Space Unification), with a cross-cutting themes section and field-level open questions. All LVC references removed; tags cleaned.
+
+Updated `index.md` with the four new source notes and revised topic summary.
+
+Working synthesis: The XOR-based streaming float compression field has a clear three-phase trajectory. Phase 1 (Gorilla, Chimp) established binary XOR with increasingly sophisticated encoding. Phase 2 (Elf, ALP, Camel) branched into active representation manipulation, vectorized columnar encoding, and decimal-component separation. Phase 3 (DeXOR) unified the branches via decimal XOR — common prefix extraction in decimal space achieves what binary manipulation and component separation could not alone. The key open question is whether multi-predecessor search (Chimp128) can be combined with decimal-space techniques (DeXOR) for further gains.
+
+Unresolved questions: remaining inbox (Batch 2: DeltaPQ, LEP, SegPQ; Batch 3: LEANN, HM-ANN, PipeANN, TriBase, XNC, Lossless-IDs) cover vector compression and retrieval acceleration — different but adjacent research areas.
+
+## [2026-05-10 18:00] ingest | Vector compression cluster: DeltaPQ, SegPQ, LEP, LEANN, Lossless-IDs + ANN systems: TriBase, HM-ANN, PipeANN, XNC
+
+Ingested 9 new papers from `raw/inbox/` and moved them to `raw/sources/papers/`.
+
+**Papers ingested:**
+
+Vector compression cluster:
+- `deltapq-2020.pdf` → DeltaPQ: lossless PQ code compression via MST-based differential encoding (Wang & Deng, PVLDB 2020)
+- `segpq-2025.pdf` → SegPQ: lossless PQ codebook compression via ε-PLA learned models (Liu et al., PVLDB 2025)
+- `lep-2024.pdf` → LEP: lossy ALP adaptation for vector embedding compression (Krippner, Master's Thesis 2024, TU Munich/CWI)
+- `lossless-compression-of-vector-ids-for-anns-2025.pdf` → Meta FAIR; ANS-based lossless compression of vector IDs and graph edges (Severo et al., arXiv 2025)
+- `leann-2025.pdf` → LEANN: storage-efficient index via embedding recomputation and graph pruning (Wang et al., UC Berkeley, under review 2025)
+
+ANN systems:
+- `tribase-2025.pdf` → TriBase: triangle-inequality lossless pruning for cluster-based ANNS (Xu et al., SIGMOD 2025)
+- `hm-ann-2020.pdf` → HM-ANN: heterogeneous memory (DRAM+PMM) graph ANNS for billion-scale (Ren et al., NeurIPS 2020)
+- `pipeann-2025.pdf` → PipeANN: SSD-aligned best-first search with asynchronous I/O pipeline (Guo & Lu, OSDI 2025)
+- `xnc-2025.pdf` → XNC: hardware-friendly FP16 embedding layer compression for LLMs (Lee et al., ISCAS 2025)
+
+**New source notes created (9):** `deltapq-2020.md`, `segpq-2025.md`, `lep-2024.md`, `lossless-compression-of-vector-ids-for-anns-2025.md`, `leann-2025.md`, `tribase-2025.md`, `hm-ann-2020.md`, `pipeann-2025.md`, `xnc-2025.md`
+
+**New entity pages created (9):** `deltapq.md`, `segpq.md`, `lep.md`, `lossless-compression-of-vector-ids.md`, `leann.md`, `tribase.md`, `hm-ann.md`, `pipeann.md`, `xnc.md`
+
+**New topic page created (1):** `wiki/topics/vector-compression.md`
+
+**Topic pages updated (3):**
+- `approximate-nearest-neighbor-search.md`: added TriBase (lossless triangle-inequality pruning) and LEANN (storage-efficient graph index) as new ANNS branches.
+- `second-tier-memory-for-vector-search.md`: added HM-ANN (heterogeneous memory branch) and PipeANN (SSD I/O pipeline optimization branch); updated tier comparison table.
+- `lossless-floating-point-compression.md`: added LEP as bridge between float compression and vector compression; added open question on adapting streaming float codecs to multi-dimensional vector data.
+
+**index.md updated:** new topic entry, 9 entity entries, 9 source note entries added to navigation.
+
+**Working synthesis:** Vector compression forms a distinct layer between lossless float compression (Gorilla→DeXOR, 1D streaming) and ANN systems (graph/search co-design). The compression targets span a stack: PQ codes (DeltaPQ), codebooks (SegPQ), raw vectors (LEP), auxiliary IDs/edges (Lossless IDs), and entire index structures (LEANN). The key insight is that different index components have different compressibility characteristics and require different techniques — multiplicative savings come from compressing each component with the right tool. The boundary between this cluster and the float compression cluster is the dimensionality of the data: 1D time series vs high-dimensional vector embeddings.
+
+The ANN systems papers (TriBase, HM-ANN, PipeANN) extend three existing branches: in-memory pruning (cluster-based triangle inequalities), heterogeneous memory (DRAM+PMM graph tiering), and SSD I/O optimization (asynchronous pipeline search).
+
+XNC is a specialized LLM-focused technique with limited applicability to general vector search — classified as a peripheral entity.
+
+**Open questions:** (1) Can DeltaPQ and SegPQ be composed for multiplicative PQ storage savings? (2) Does LEP's columnar layout finding transfer to other vector compression schemes? (3) Can HM-ANN's memory-tier design be ported to CXL memory now that Optane is discontinued? (4) Can PipeANN's asynchronous pipeline approach be combined with LEANN's embedding recomputation for further SSD index latency reduction? (5) Is there a unified compression budget allocation framework across vectors, codes, codebooks, IDs, and graph metadata?

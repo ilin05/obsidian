@@ -3,13 +3,13 @@ id: approximate-nearest-neighbor-search
 type: topic
 status: active
 created: 2026-04-08
-updated: 2026-05-08
+updated: 2026-05-10
 tags:
   - ann
   - retrieval
   - vector-search
   - systems
-source_count: 42
+source_count: 44
 sources:
   - raw/sources/papers/graph-based-anns-survey-2021.pdf
   - raw/sources/papers/nn-descent-2011.pdf
@@ -53,6 +53,8 @@ sources:
   - raw/sources/papers/bang-2024.pdf
   - raw/sources/papers/spfresh-2023.pdf
   - raw/sources/papers/svfusion-2026.pdf
+  - raw/sources/papers/tribase-2025.pdf
+  - raw/sources/papers/leann-2025.pdf
 related:
   - product-quantization
   - rabitq
@@ -93,9 +95,12 @@ related:
   - svfusion
   - patience-in-proximity
   - ansmet
+  - tribase
+  - leann
   - second-tier-memory-for-vector-search
   - disaggregated-memory-vector-search
   - vector-quantization
+  - vector-compression
 confidence: high
 ---
 
@@ -110,6 +115,7 @@ ANN search in this vault spans three layers: compression methods, graph/index me
 - **Systems/memory-tier:** DiskANN, SPANN, Starling, and SPFresh for SSD/DRAM+SSD; RUMMY and BANG for GPU/host-memory execution; GustANN and FusionANNS for SSD+GPU collaboration; SmartANNS for SmartSSD/NDP; and CXL-ANNS/d-HNSW for disaggregated memory.
 - **Production systems:** FAISS as a library baseline and Milvus as a vector DBMS reference.
 - **Query semantics and freshness:** VBASE for vector-relational query processing and SPFresh for incremental updates.
+- **Pruning and storage efficiency:** TriBase for lossless triangle-inequality pruning in cluster-based indexes and LEANN for storage-efficient graph indexes via embedding recomputation.
 - **Evaluation infrastructure:** ANN-Benchmarks for in-memory Pareto evaluation, Graph-Based ANNS Survey 2021 for graph-component attribution, and SVFusion/SPFresh-style streaming metrics for update-heavy systems.
 - **Non-graph baselines:** FLANN and FALCONN keep the benchmark layer connected to tree/auto-tuning and LSH/angular-distance methods.
 
@@ -141,6 +147,10 @@ ANN search in this vault spans three layers: compression methods, graph/index me
 
 **Near-memory:** [ANSMET](../entities/ansmet.md) uses near-memory processing and hybrid early termination, giving a useful contrast for where computation happens.
 
+**Lossless pruning:** [TriBase](../entities/tribase.md) refines cluster-based indexes with multi-level partitioning and dual (distance + angle) triangle-inequality pruning, achieving >99.4% pruning without accuracy loss. Demonstrates that distance computation — which accounts for 99.7% of in-memory ANNS time — can be dramatically reduced through geometric reasoning.
+
+**Storage-efficient indexing:** [LEANN](../entities/leann.md) eliminates vector storage entirely by recomputing embeddings on-the-fly at query time and applies high-degree-preserving graph pruning. Represents a new design point: trade a small amount of search latency (acceptable in RAG where generation dominates) for massive storage savings (up to 50×).
+
 ## Key System Progression
 
 DiskANN/SPANN show how to survive SSD latency with coarse-grained access. Starling refines SSD graph search at the data-segment layout level, while SPFresh extends the SSD/cluster branch to fresh updates. RUMMY/BANG show how to use a GPU when the full dataset or graph cannot fit in HBM. SVFusion adds a newer streaming branch where GPU/CPU/disk placement and update consistency are part of the ANN protocol. GustANN/FusionANNS show how GPU collaboration can improve SSD-backed search when PCIe movement is carefully controlled. SmartANNS shows the near-data-processing branch. CXL-ANNS shows what custom CXL endpoint compute can do, while d-HNSW shows how graph traversal changes under RDMA-style memory disaggregation.
@@ -166,5 +176,7 @@ DiskANN/SPANN show how to survive SSD latency with coarse-grained access. Starli
 - [RUMMY](../entities/rummy.md) · [BANG](../entities/bang.md) · [SVFusion](../entities/svfusion.md) · [GustANN](../entities/gustann.md) · [FusionANNS](../entities/fusionanns.md)
 - [SmartANNS](../entities/smartanns.md) · [Starling](../entities/starling.md) · [SPFresh](../entities/spfresh.md) · [VBASE](../entities/vbase.md)
 - [CXL-ANNS](../entities/cxl-anns.md) · [d-HNSW](../entities/d-hnsw.md) · [ANSMET](../entities/ansmet.md)
+- [TriBase](../entities/tribase.md) · [LEANN](../entities/leann.md)
 - [Second-tier Memory for Vector Search](second-tier-memory-for-vector-search.md)
 - [Disaggregated Memory Vector Search](disaggregated-memory-vector-search.md)
+- [Vector Compression](vector-compression.md)

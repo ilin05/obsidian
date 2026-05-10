@@ -23,7 +23,9 @@ This file is the primary catalog for the vault's durable wiki content.
 - [Proximity Graph Theory for ANN](wiki/topics/proximity-graph-theory-for-ann.md) - Graph-theoretic foundations for ANN graph indexes, including small-world navigability, MRNG, SSG, RNG Strategy, and RNSG.
 - [Second-tier Memory for Vector Search](wiki/topics/second-tier-memory-for-vector-search.md) - System-level framing of SSD vs CXL/second-tier-memory trade-offs for billion-scale ANN.
 - [Disaggregated Memory Vector Search](wiki/topics/disaggregated-memory-vector-search.md) - CXL/RDMA-oriented ANN serving patterns, including caching, layout, and pipeline design.
+- [Lossless Floating Point Compression](wiki/topics/lossless-floating-point-compression.md) - Synthesis of XOR-based streaming float compression: Gorilla, Chimp, Elf, ALP, Camel, and DeXOR.
 - [CXL Disaggregated Memory Systems](wiki/topics/cxl-disaggregated-memory-systems.md) - Cross-domain CXL system patterns spanning ANN, databases, and serverless runtimes.
+- [Vector Compression](wiki/topics/vector-compression.md) - Synthesis of vector compression techniques for ANN search spanning PQ codes, codebooks, vector IDs, graph edges, and embedding recomputation.
 
 ## Entities
 
@@ -66,7 +68,16 @@ This file is the primary catalog for the vault's durable wiki content.
 - [Patience in Proximity](wiki/entities/patience-in-proximity.md) - Saturation-based early termination heuristic for HNSW traversal.
 - [ANSMET](wiki/entities/ansmet.md) - Near-memory ANN acceleration with hybrid early termination.
 - [CXLfork](wiki/entities/cxlfork.md) - CXL-based remote process cloning interface for serverless-style workloads.
+- [DeltaPQ](wiki/entities/deltapq.md) - Lossless PQ code compression via MST-based differential encoding; 2–5× compression, direct search on compressed data.
+- [HM-ANN](wiki/entities/hm-ann.md) - Heterogeneous memory (DRAM+PMM) graph ANNS for billion-scale search without compression.
+- [LEANN](wiki/entities/leann.md) - Storage-efficient vector index using on-the-fly embedding recomputation and high-degree-preserving graph pruning.
+- [LEP](wiki/entities/lep.md) - Lossy variant of ALP for vector embeddings; tunable compression via per-dimension decimal encoding.
+- [Lossless Compression of Vector IDs](wiki/entities/lossless-compression-of-vector-ids.md) - ANS-based lossless compression of IVF list IDs and graph edges; up to 7× ID compression.
+- [PipeANN](wiki/entities/pipeann.md) - Low-latency on-disk graph ANNS aligning best-first search with SSD I/O via asynchronous pipeline.
 - [PolarCXLMem](wiki/entities/polarcxlmem.md) - CXL-switch-based disaggregated-memory architecture for cloud-native databases.
+- [SegPQ](wiki/entities/segpq.md) - Lossless PQ codebook compression via ε-PLA; up to 4.7× reduction, SIMD-aware query processing.
+- [TriBase](wiki/entities/tribase.md) - Cluster-based ANNS pruning via distance and angle triangle inequalities; >99.4% pruning rate.
+- [XNC](wiki/entities/xnc.md) - Hardware-friendly lossless compression for LLM FP16 embedding layers; 1.34× compression, 4/3 cycle encode/decode.
 - [Morsel-driven Parallelism](wiki/entities/morsel-driven-parallelism.md) - NUMA-aware dynamic scheduling concept from database query execution.
 
 ## Personal
@@ -123,6 +134,19 @@ This file is the primary catalog for the vault's durable wiki content.
 - [SVFusion: A CPU-GPU Co-Processing Architecture for Large-Scale Real-Time Vector Search](wiki/source-notes/svfusion-2026.md) - Source note on SVFusion's CPU-GPU-disk streaming ANN design.
 - [Gorilla: A Fast, Scalable, In-Memory Time Series Database](wiki/source-notes/gorilla-2015.md) - Pelkonen et al. VLDB 2015; foundational XOR-based streaming float compression (Facebook).
 - [Chimp: Efficient Lossless Floating Point Compression for Time Series Databases](wiki/source-notes/chimp-2022.md) - Liakos et al. PVLDB 2022; improved XOR encoding with leading-zero analysis and Chimp128 multi-predecessor variant.
+- [Elf: Erasing-based Lossless Floating-Point Compression](wiki/source-notes/elf-2023.md) - Li et al. PVLDB 2023; trailing-zero creation via mantissa erasure with lossless restoration.
+- [ALP: Adaptive Lossless floating-Point Compression](wiki/source-notes/alp-2023.md) - Afroozeh et al. SIGMOD 2023; vectorized adaptive encoding (decimal→int or front-bits), SIMD-friendly.
+- [Camel: Efficient Compression of Floating-Point Time Series](wiki/source-notes/camel-2024.md) - Yao et al. SIGMOD 2024; integer-decimal separation with stable-trailing-zero decimal XOR.
+- [DeXOR: Enabling XOR in Decimal Space for Streaming Lossless Compression](wiki/source-notes/dexor-2025.md) - Lv et al. arXiv 2025; decimal XOR with longest common prefix extraction and suffix scaling.
+- [DeltaPQ: Lossless Product Quantization Code Compression](wiki/source-notes/deltapq-2020.md) - Wang and Deng PVLDB 2020; MST-based differential compression of PQ codes.
+- [SegPQ: A Learned Approach to Compress PQ Codebooks](wiki/source-notes/segpq-2025.md) - Liu et al. PVLDB 2025; ε-PLA model for lossless codebook compression.
+- [Rethinking Vector Embeddings Search for Analytical Database Systems (LEP)](wiki/source-notes/lep-2024.md) - Krippner Master's Thesis 2024; lossy ALP adaptation for vector embeddings.
+- [Lossless Compression of Vector IDs for ANNS](wiki/source-notes/lossless-compression-of-vector-ids-for-anns-2025.md) - Severo et al. arXiv 2025; ANS and wavelet tree compression of auxiliary ANN data.
+- [LEANN: A Low-Storage Overhead Vector Index](wiki/source-notes/leann-2025.md) - Wang et al. under review 2025; embedding recomputation with pruned graph index.
+- [TriBase: A Vector Data Query Engine for Lossless Pruning via Triangle Inequalities](wiki/source-notes/tribase-2025.md) - Xu et al. SIGMOD 2025; fine-grained triangle inequality pruning in cluster-based ANN.
+- [HM-ANN: Efficient Billion-Point Nearest Neighbor Search on Heterogeneous Memory](wiki/source-notes/hm-ann-2020.md) - Ren et al. NeurIPS 2020; memory-tier-aware HNSW generalization for DRAM+PMM.
+- [PipeANN: Aligning Best-First Search with SSD for Low-Latency Graph ANNS](wiki/source-notes/pipeann-2025.md) - Guo and Lu OSDI 2025; asynchronous I/O pipeline for on-disk graph traversal.
+- [XNC: XOR and NOT-Based Lossless Compression for LLM Embedding Layers](wiki/source-notes/xnc-2025.md) - Lee et al. ISCAS 2025; hardware-friendly FP16 embedding compression via XOR+NOT truncation.
 
 ## Analyses
 

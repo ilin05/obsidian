@@ -65,19 +65,16 @@ Chimp re-examines the design assumptions of Gorilla's XOR-based float compressio
 - Chimp128 is 4.5–48× faster than general-purpose algorithms that achieve similar compression (Xz, Brotli)
 - On single-precision (32-bit): similar pattern — Chimp64 outperforms Gorilla
 
-## Relevance to LVC
+## Significance
 
-Chimp is the **second-generation XOR codec** that LVC's coding layer directly builds upon. Three specific connections:
-
-1. **Leading-zero analysis**: Chimp proved that float differential residuals are dominated by leading zeros. This directly justifies LVC's per-dimension state machine design — the state tracks leading zero patterns dimension-by-dimension.
-2. **Multi-predecessor search (Chimp128)**: The ring buffer + hash lookup for finding the best XOR partner among 128 predecessors is conceptually analogous to LVC's BFS-ordered reference chain selection in the graph. LVC replaces temporal ordering with graph-guided ordering.
-3. **Conditional encoding thresholds**: LVC's DeXOR and Camel codecs extend Chimp's conditional approach — instead of a fixed threshold (6 trailing zeros), they use decimal-aware thresholds tied to the dimension's value distribution.
+Chimp is the definitive empirical re-examination of XOR-based float compression. By characterizing 14 diverse time series, it identified that Gorilla's core assumptions (many trailing zeros, frequent identical values) do not hold for real float data. Its exponential-decay leading-zero encoding and conditional trailing-zero handling are now standard techniques. Chimp128's hash-based multi-predecessor search demonstrated that looking beyond the immediately previous value yields major gains — a principle later adopted by Elf (via erasing to force trailing zeros) and DeXOR (via decimal common prefix search). Chimp established the speed-size Pareto frontier that subsequent work (Elf, ALP, Camel, DeXOR) competes against.
 
 ## Limits And Open Questions
 
-- Chimp128's hash-based predecessor lookup (using low 14 bits of value) works well for time series but may degrade for vector data with different value distributions per dimension.
-- The ring buffer approach assumes temporal locality; graph-guided BFS ordering in LVC must provide analogous locality guarantees.
-- Single-precision variant (32-bit) uses Chimp64 (64 predecessors); scaling to vector dimensions requires per-dimension state management.
+- Chimp128's hash-based predecessor lookup (low 14 bits of value as array index) exploits temporal locality — the effectiveness on non-time-series data where values are not temporally ordered is less characterized.
+- The fixed threshold of 6 for trailing-zero encoding is derived empirically from the 14 datasets studied; optimality on unseen data distributions is not guaranteed.
+- Uses 128 predecessors as a fixed constant; the trade-off between search window size, hash collision rate, and compression gain is dataset-dependent.
+- Single-precision mode (32-bit, Chimp64) reduces the predecessor window to 64; the scaling behavior with precision is not formally analyzed.
 
 ## Related Pages
 

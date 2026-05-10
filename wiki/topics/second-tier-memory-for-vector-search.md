@@ -3,14 +3,14 @@ id: second-tier-memory-for-vector-search
 type: topic
 status: active
 created: 2026-04-08
-updated: 2026-05-08
+updated: 2026-05-10
 tags:
   - ann
   - systems
   - second-tier-memory
   - ssd
   - cxl
-source_count: 12
+source_count: 14
 sources:
   - raw/sources/papers/performance-index-size-dilemma-2024.pdf
   - raw/sources/papers/diskann-2019.pdf
@@ -24,6 +24,8 @@ sources:
   - raw/sources/papers/bang-2024.pdf
   - raw/sources/papers/spfresh-2023.pdf
   - raw/sources/papers/svfusion-2026.pdf
+  - raw/sources/papers/hm-ann-2020.pdf
+  - raw/sources/papers/pipeann-2025.pdf
 related:
   - diskann
   - spann
@@ -35,6 +37,8 @@ related:
   - bang
   - spfresh
   - svfusion
+  - hm-ann
+  - pipeann
   - disaggregated-memory-vector-search
   - approximate-nearest-neighbor-search
 confidence: medium
@@ -44,7 +48,7 @@ confidence: medium
 
 ## Summary
 
-This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-centered indexes optimize for coarse-grained storage access, GPU/host-memory systems optimize PCIe scheduling, SmartSSD systems move compute into storage, and CXL approaches can revisit finer-grained graph traversal because the memory tier is byte-addressable and far lower latency than SSD.
+This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-centered indexes optimize for coarse-grained storage access, GPU/host-memory systems optimize PCIe scheduling, SmartSSD systems move compute into storage, heterogeneous memory (HM) systems exploit DRAM+PMM tiers, and CXL approaches can revisit finer-grained graph traversal because the memory tier is byte-addressable and far lower latency than SSD.
 
 ## Current View
 
@@ -56,6 +60,8 @@ This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-
 - [SVFusion](../entities/svfusion.md) adds a streaming CPU-GPU-disk branch: hot vectors/subgraphs in GPU HBM, complete graph coordination in CPU memory/disk, and update consistency across tiers.
 - [GustANN](../entities/gustann.md) and [FusionANNS](../entities/fusionanns.md) add the SSD+GPU branch: both reduce the cost of billion-scale search by keeping large data on SSD while using GPU selectively.
 - [SmartANNS](../entities/smartanns.md) adds the SmartSSD/NDP branch, where computation is moved into commercial computational-storage devices.
+- [HM-ANN](../entities/hm-ann.md) adds the heterogeneous memory (DRAM+PMM) branch: generalizes HNSW with top-down insertion in slow memory and bottom-up pivot promotion to fast memory, enabling billion-scale graph search without vector compression. Achieves 46% higher recall than compression-based methods.
+- [PipeANN](../entities/pipeann.md) adds the SSD pipeline optimization branch: aligns best-first search with SSD I/O characteristics by exploiting pseudo-dependency between compute and I/O, achieving 1.14–2.02× in-memory latency and 35% of DiskANN's latency.
 - The performance/index-size dilemma paper argues that SSD access granularity drives throughput amplification in billion-scale search.
 - CXL memory characterization provides the hardware basis for a different design point: random access is still costly compared with DRAM, but feasible enough that HNSW-style traversal can be redesigned rather than abandoned.
 
@@ -65,8 +71,9 @@ This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-
 |---|---|---|---|
 | Local DRAM | tens of ns | random-friendly | HNSW, ScaNN, FAISS in-memory |
 | CXL memory | tens to low hundreds of ns depending on hardware | random-tolerant but bandwidth-sensitive | CXL-aware ANN placement, caching, scheduling, or device-side co-design |
-| NVM/Optane | hundreds of ns | mixed | hybrid layouts |
+| NVM/Optane | hundreds of ns | mixed | HM-ANN-style hybrid layouts with fast-memory upper layers and slow-memory L0 |
 | SSD/NVMe | 100-200 us | sequential-friendly | IVF posting lists, beam/search batching |
+| SSD + I/O pipeline | SSD latency plus parallel async I/O | high throughput if overlapping compute and I/O | PipeANN-style PipeSearch, dynamic pipeline width, I/O waste bounding |
 | SSD + GPU | SSD latency plus PCIe transfer | high throughput if batched and transfer-efficient | GustANN/FusionANNS-style collaborative filtering, selective transfer, and rerank deduplication |
 | Host memory + GPU | DRAM latency plus PCIe transfer | high throughput if transfer/computation overlap | RUMMY/BANG-style batching, compressed GPU state, and CPU-GPU pipelining |
 | CPU-GPU-disk streaming | GPU HBM capacity plus PCIe and update synchronization | high throughput if hot vectors stay in HBM and updates avoid global rebuilds | SVFusion-style workload-aware placement, multi-version consistency, and lazy repair |
@@ -85,6 +92,7 @@ This topic tracks ANN designs that treat memory capacity as the bottleneck. SSD-
 
 - [DiskANN](../entities/diskann.md) · [SPANN](../entities/spann.md) · [Starling](../entities/starling.md) · [SPFresh](../entities/spfresh.md)
 - [RUMMY](../entities/rummy.md) · [BANG](../entities/bang.md) · [SVFusion](../entities/svfusion.md) · [GustANN](../entities/gustann.md) · [FusionANNS](../entities/fusionanns.md) · [SmartANNS](../entities/smartanns.md)
+- [HM-ANN](../entities/hm-ann.md) · [PipeANN](../entities/pipeann.md)
 - [Disaggregated Memory Vector Search](disaggregated-memory-vector-search.md)
 - [Approximate Nearest Neighbor Search](approximate-nearest-neighbor-search.md)
 - [Performance vs Index-size Dilemma Source Note](../source-notes/performance-index-size-dilemma-2024.md)

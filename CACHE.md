@@ -20,6 +20,8 @@ Shortest read path for agents working on any ANNS system paper.
 - GPU/heterogeneous: [BANG](wiki/entities/bang.md), [RUMMY](wiki/entities/rummy.md), [GustANN](wiki/entities/gustann.md), [FusionANNS](wiki/entities/fusionanns.md), [SVFusion](wiki/entities/svfusion.md).
 - CXL/RDMA/NDP: [Disaggregated Memory Vector Search](wiki/topics/disaggregated-memory-vector-search.md), [CXL-ANNS](wiki/entities/cxl-anns.md), [d-HNSW](wiki/entities/d-hnsw.md), [SmartANNS](wiki/entities/smartanns.md).
 - Vector DB semantics: [Milvus](wiki/entities/milvus.md), [VBASE](wiki/entities/vbase.md), [RNSG](wiki/entities/rnsg.md).
+- Vector compression: [Vector Compression](wiki/topics/vector-compression.md), [DeltaPQ](wiki/entities/deltapq.md), [SegPQ](wiki/entities/segpq.md), [LEP](wiki/entities/lep.md), [LEANN](wiki/entities/leann.md).
+- Lossless float compression: [Lossless Floating Point Compression](wiki/topics/lossless-floating-point-compression.md), [Gorilla](wiki/source-notes/gorilla-2015.md), [Chimp](wiki/source-notes/chimp-2022.md), [Elf](wiki/source-notes/elf-2023.md), [ALP](wiki/source-notes/alp-2023.md), [Camel](wiki/source-notes/camel-2024.md), [DeXOR](wiki/source-notes/dexor-2025.md).
 
 ## Claim Boundaries
 

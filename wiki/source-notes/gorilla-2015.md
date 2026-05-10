@@ -65,15 +65,16 @@ Gorilla is Facebook's in-memory time series database (TSDB) that functions as a 
 - Block size of 2 hours gives near-optimal compression; larger blocks yield diminishing returns
 - 10× storage reduction enables fully in-memory operation
 
-## Relevance to LVC
+## Significance
 
-Gorilla is the **progenitor** of the XOR-based streaming float compression lineage. LVC's DeXOR, Camel, Elf, and Gorilla codecs all descend from this pattern. The key difference: Gorilla compresses along a 1D time axis (previous = temporally preceding value), while LVC compresses across graph edges (previous = graph neighbor in a differential chain). LVC's `getOriginalDataByInternalId()` backtrack-then-forward-decode generalizes Gorilla's single-hop XOR decode to multi-hop chain replay.
+Gorilla is the foundational XOR-based streaming float compression scheme. Its design — XOR with the previous value, encode runs of leading/trailing zeros — established the pattern that all subsequent streaming float codecs (Chimp, Elf, ALP, Camel, DeXOR) build upon. It demonstrated that domain-specific streaming compression can outperform general-purpose compressors on speed while achieving comparable or better compression ratios for time series data.
 
 ## Limits And Open Questions
 
 - The assumption that consecutive values have similar IEEE 754 encoding holds for slowly-varying time series but breaks for high-frequency or noisy data.
-- Chimp (2022) later showed that Gorilla's design over-allocates bits for trailing zero encoding and under-exploits leading zero structure.
-- The block-based grouping introduces a trade-off between compression ratio and random-access decode cost — directly relevant to LVC's bounded chain length design.
+- Chimp (2022) later showed that Gorilla's design over-allocates bits for trailing zero encoding (6 bits specifying trailing-zero count is often wasted) and under-exploits leading zero structure.
+- The block-based grouping (2-hour windows) introduces a trade-off between compression ratio and random-access decode cost — decompressing a single value may require decoding from the block header.
+- Uses only the immediately preceding value as reference; later work (Chimp128, DeXOR) showed that searching multiple candidates improves compression.
 
 ## Related Pages
 
