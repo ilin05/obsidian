@@ -121,6 +121,8 @@ This file is the primary catalog for the vault's durable wiki content.
 - [BANG: Billion-Scale Approximate Nearest Neighbour Search using a Single GPU](wiki/source-notes/bang-2024.md) - Source note on BANG's single-GPU graph ANNS design with compressed vectors and host graph access.
 - [SPFresh: Incremental In-Place Update for Billion-Scale Vector Search](wiki/source-notes/spfresh-2023.md) - Source note on SPFresh and LIRE for fresh updates in disk-based vector search.
 - [SVFusion: A CPU-GPU Co-Processing Architecture for Large-Scale Real-Time Vector Search](wiki/source-notes/svfusion-2026.md) - Source note on SVFusion's CPU-GPU-disk streaming ANN design.
+- [Gorilla: A Fast, Scalable, In-Memory Time Series Database](wiki/source-notes/gorilla-2015.md) - Pelkonen et al. VLDB 2015; foundational XOR-based streaming float compression (Facebook).
+- [Chimp: Efficient Lossless Floating Point Compression for Time Series Databases](wiki/source-notes/chimp-2022.md) - Liakos et al. PVLDB 2022; improved XOR encoding with leading-zero analysis and Chimp128 multi-predecessor variant.
 
 ## Analyses
 

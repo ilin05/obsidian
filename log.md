@@ -233,3 +233,19 @@ Created a vault-local skill at `skills/anns-research-figure-drawing/SKILL.md` fo
 Updated `CACHE.md` and `index.md` so the new figure cache, figure guide, and skill are discoverable.
 
 Unresolved questions: future work should add cropped single-figure assets and paper-local figure templates once a concrete target paper repository is available.
+
+## [2026-05-10 15:00] ingest | Gorilla and Chimp — XOR-based float compression for LVC
+
+Ingested two foundational float compression papers from `raw/inbox/` and moved them to `raw/sources/papers/`: `gorilla-2015.pdf` and `chimp-2022.pdf`.
+
+Created source notes:
+- `wiki/source-notes/gorilla-2015.md` — Facebook's in-memory TSDB; XOR-based streaming float compression, delta-of-delta timestamps, 1.37 bytes/point (12×), 51% identical-value compression.
+- `wiki/source-notes/chimp-2022.md` — PVLDB 2022 re-analysis of Gorilla's design assumptions; exponential-decay leading-zero encoding (3-bit, 0.95 bits/value saved), conditional trailing-zero handling (threshold 6), Chimp128 multi-predecessor variant (hash-based O(1) lookup, ~40% better than Gorilla).
+
+Created topic page `wiki/topics/lossless-floating-point-compression.md` synthesizing the XOR-based streaming compression lineage: Gorilla → Chimp → LVC codecs (DeXOR, Camel, Elf). Maps key design dimensions (reference selection, leading/trailing zero handling, multi-predecessor strategy) across the three generations.
+
+Updated `index.md` with the new topic and two source notes.
+
+Working synthesis: These two papers establish the XOR-based float compression foundation that LVC's coding layer extends from 1D time series to graph-guided high-dimensional vector differential encoding. Gorilla is the progenitor; Chimp provides the critical empirical insight (leading zeros dominate, trailing zeros don't) that LVC's per-dimension state machine design exploits. Chimp128's hash-based multi-predecessor search is the conceptual precursor to LVC's graph-guided BFS reference selection.
+
+Unresolved questions: remaining inbox papers in this cluster (Elf, ALP, DeXOR, Camel) form the third-generation codecs that LVC directly implements — these are needed to complete the float compression lineage picture.
