@@ -3,7 +3,7 @@ id: product-quantization
 type: entity
 status: active
 created: 2026-04-08
-updated: 2026-04-08
+updated: 2026-05-10
 tags:
   - method
   - ann
@@ -14,6 +14,8 @@ sources:
   - raw/sources/papers/product-quantization-2011.pdf
 related:
   - product-quantization-for-nearest-neighbor-search-2011
+  - pq-fast-scan
+  - quicker-adc
   - approximate-nearest-neighbor-search
   - vector-quantization
   - turboquant
@@ -37,6 +39,7 @@ Product Quantization (PQ) is a retrieval-oriented vector compression method that
 
 - ADC keeps the query unquantized and usually improves accuracy.
 - IVFADC adds a coarse partitioning stage so search does not scan the whole database.
+- PQ Fast Scan and Quicker ADC show that ADC performance depends on SIMD-friendly lookup-table placement, not only on codebook quality.
 
 ## Why It Is Important
 
@@ -51,5 +54,7 @@ Product Quantization (PQ) is a retrieval-oriented vector compression method that
 ## Related Pages
 
 - [PQ Source Note](../source-notes/product-quantization-for-nearest-neighbor-search-2011.md)
+- [PQ Fast Scan](pq-fast-scan.md)
+- [Quicker ADC](quicker-adc.md)
 - [Approximate Nearest Neighbor Search](../topics/approximate-nearest-neighbor-search.md)
 - [TurboQuant](turboquant.md)

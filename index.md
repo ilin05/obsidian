@@ -21,6 +21,8 @@ This file is the primary catalog for the vault's durable wiki content.
 - [Approximate Nearest Neighbor Search](wiki/topics/approximate-nearest-neighbor-search.md) - Unified synthesis of ANN quantization methods and graph/system serving designs.
 - [ANN Benchmarking Methodology](wiki/topics/ann-benchmarking-methodology.md) - Evaluation framework for ANN implementation, graph-component, hardware-tier, and streaming-update claims.
 - [Proximity Graph Theory for ANN](wiki/topics/proximity-graph-theory-for-ann.md) - Graph-theoretic foundations for ANN graph indexes, including small-world navigability, MRNG, SSG, RNG Strategy, and RNSG.
+- [SIMD and Vectorization for ANN Systems](wiki/topics/simd-and-vectorization-for-ann-systems.md) - CPU SIMD/vectorization execution layer for ANN kernels, compressed scans, filters, and cache-aware batching.
+- [Scalar and Binary Quantization for ANN](wiki/topics/scalar-and-binary-quantization-for-ann.md) - Scalar, binary, and low-precision quantization branch for ANN memory reduction and distance-kernel acceleration.
 - [Second-tier Memory for Vector Search](wiki/topics/second-tier-memory-for-vector-search.md) - System-level framing of SSD vs CXL/second-tier-memory trade-offs for billion-scale ANN.
 - [Disaggregated Memory Vector Search](wiki/topics/disaggregated-memory-vector-search.md) - CXL/RDMA-oriented ANN serving patterns, including caching, layout, and pipeline design.
 - [CXL Disaggregated Memory Systems](wiki/topics/cxl-disaggregated-memory-systems.md) - Cross-domain CXL system patterns spanning ANN, databases, and serverless runtimes.
@@ -35,7 +37,16 @@ This file is the primary catalog for the vault's durable wiki content.
 - [FLANN](wiki/entities/flann.md) - Classical auto-tuning ANN library built around randomized KD forests and priority search k-means trees.
 - [FALCONN](wiki/entities/falconn.md) - Practical cross-polytope LSH library for angular/cosine-distance nearest neighbor search.
 - [Product Quantization](wiki/entities/product-quantization.md) - Classical retrieval-oriented vector quantization method built around subspace codebooks.
+- [PQ Fast Scan](wiki/entities/pq-fast-scan.md) - SIMD in-register lookup method for accelerating ADC over product-quantized ANN codes.
+- [Quicker ADC](wiki/entities/quicker-adc.md) - AVX2/AVX-512-oriented generalization of Quick ADC for FAISS/PQ search.
 - [RaBitQ](wiki/entities/rabitq.md) - Data-oblivious ANN quantization family extended here to multi-bit high-recall retrieval.
+- [Low-Precision Quantization for KNN](wiki/entities/low-precision-quantization-knn.md) - Implementation-level int8 quantization approach for KNN indexes and distance kernels.
+- [Norm-Explicit Quantization](wiki/entities/norm-explicit-quantization.md) - MIPS quantization paradigm that explicitly quantizes vector norms separately from directions.
+- [Quantization to Speedup ANN](wiki/entities/quantization-to-speedup-ann.md) - IVF-HNSW acceleration paper using adaptive nprobe and per-centroid graph search.
+- [SymphonyQG](wiki/entities/symphonyqg.md) - Graph-plus-quantization method combining RaBitQ, FastScan, implicit reranking, and graph refinement.
+- [AQR-HNSW](wiki/entities/aqr-hnsw.md) - Low-confidence preprint on density-aware scalar quantization and progressive reranking for HNSW.
+- [HNSW-LAVQ](wiki/entities/hnsw-lavq.md) - Low-confidence OpenReview paper on percentile-clipped scalar quantization and AVX2 HNSW kernels.
+- [Information-Theoretic Binarization for Vector Search](wiki/entities/information-theoretic-binarization-vector-search.md) - Low-confidence preprint on binary quantization as a vector-search architecture.
 - [QJL](wiki/entities/qjl.md) - Quantized JL method for KV-cache quantization with zero metadata overhead as a core claim.
 - [TurboQuant](wiki/entities/turboquant.md) - Online two-stage quantization method connecting MSE-optimal compression with QJL-style inner-product estimation.
 - [HNSW](wiki/entities/hnsw.md) - Foundational hierarchical graph index for high-recall ANN traversal.
@@ -63,6 +74,13 @@ This file is the primary catalog for the vault's durable wiki content.
 - [BANG](wiki/entities/bang.md) - Single-GPU graph ANNS system using compressed vectors on GPU and host-resident graph access.
 - [SPFresh](wiki/entities/spfresh.md) - Disk-based billion-scale vector search system for incremental in-place updates via LIRE.
 - [SVFusion](wiki/entities/svfusion.md) - CPU-GPU-disk streaming vector search system with workload-aware GPU placement and update consistency.
+- [FastLanes](wiki/entities/fastlanes.md) - SIMD-friendly compression layout project for high-throughput integer decoding and vectorized execution.
+- [SIMD Investments](wiki/entities/simd-investments.md) - AVX-512 compiled-query pipeline paper on lane refill and control-flow divergence.
+- [Compiled and Vectorized Queries](wiki/entities/compiled-vectorized-queries.md) - PVLDB 2018 execution-model comparison of vectorized and data-centric compiled queries.
+- [Rethinking SIMD Vectorization](wiki/entities/rethinking-simd-vectorization.md) - SIGMOD 2015 database operator SIMD design paper covering gathers, scatters, hashing, and partitioning.
+- [SIMD-Based Posting List Decoding](wiki/entities/simd-based-posting-list-decoding.md) - SIMD compressed posting-list decoding source for search-system ID/list paths.
+- [SIMD Compression and Intersection](wiki/entities/simd-compression-and-intersection.md) - SIMD integer compression and sorted-list intersection source for filtered/vector hybrid search.
+- [Stream VByte](wiki/entities/stream-vbyte.md) - SIMD-friendly byte-oriented integer codec with separate control and data streams.
 - [Patience in Proximity](wiki/entities/patience-in-proximity.md) - Saturation-based early termination heuristic for HNSW traversal.
 - [ANSMET](wiki/entities/ansmet.md) - Near-memory ANN acceleration with hybrid early termination.
 - [CXLfork](wiki/entities/cxlfork.md) - CXL-based remote process cloning interface for serverless-style workloads.
@@ -88,6 +106,15 @@ This file is the primary catalog for the vault's durable wiki content.
 - [Product Quantization for Nearest Neighbor Search](wiki/source-notes/product-quantization-for-nearest-neighbor-search-2011.md) - Foundational source note on PQ, ADC, and IVFADC for ANN search.
 - [Practical and Asymptotically Optimal Quantization of High-Dimensional Vectors in Euclidean Space for Approximate Nearest Neighbor Search](wiki/source-notes/rabitq-extension-2024.md) - Source note on the multi-bit RaBitQ extension for high-recall ANN search.
 - [TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate](wiki/source-notes/turboquant-2025.md) - Source note on a general online quantization framework spanning KV caches and retrieval.
+- [Cache Locality is Not Enough: PQ Fast Scan](wiki/source-notes/pq-fast-scan-2015.md) - Source note on SIMD in-register lookup for accelerating PQ/ADC ANN scan.
+- [Quicker ADC](wiki/source-notes/quicker-adc-2019.md) - Source note on AVX2/AVX-512 ADC acceleration for product quantization in FAISS and IVF-HNSW settings.
+- [Low-Precision Quantization for Efficient Nearest Neighbor Search](wiki/source-notes/low-precision-quantization-knn-2021.md) - Source note on int8 low-precision KNN storage and distance computation.
+- [Norm-Explicit Quantization](wiki/source-notes/norm-explicit-quantization-mips-2020.md) - Source note on norm/direction decomposition for MIPS quantization.
+- [Quantization to Speedup Approximate Nearest Neighbor Search](wiki/source-notes/quantization-to-speedup-ann-2024.md) - Source note on IVF-HNSW adaptive termination and per-centroid graph search.
+- [SymphonyQG](wiki/source-notes/symphonyqg-2024.md) - Source note on graph-plus-RaBitQ/FastScan co-design for ANN search.
+- [AQR-HNSW](wiki/source-notes/aqr-hnsw-2026.md) - Low-confidence source note on density-aware quantized HNSW and progressive reranking.
+- [Quantization-Enhanced HNSW / LAVQ](wiki/source-notes/quantization-enhanced-hnsw-lavq-2025.md) - Low-confidence source note on percentile-clipped scalar quantization for HNSW.
+- [Information-Theoretic Binarization for Vector Search](wiki/source-notes/information-theoretic-binarization-vector-search-2026.md) - Low-confidence source note on binary vector-search architecture.
 - [Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs](wiki/source-notes/hnsw-2016.md) - Source note on the HNSW graph hierarchy and routing heuristic.
 - [Fast Approximate Nearest Neighbor Search With the Navigating Spreading-out Graph](wiki/source-notes/nsg-2019.md) - Source note on MRNG/NSG design for billion-scale graph-based ANN.
 - [A Comprehensive Survey and Experimental Comparison of Graph-Based Approximate Nearest Neighbor Search](wiki/source-notes/graph-based-anns-survey-2021.md) - PVLDB 2021 survey note on graph ANN taxonomy, base graphs, and component-level evaluation.
@@ -121,10 +148,18 @@ This file is the primary catalog for the vault's durable wiki content.
 - [BANG: Billion-Scale Approximate Nearest Neighbour Search using a Single GPU](wiki/source-notes/bang-2024.md) - Source note on BANG's single-GPU graph ANNS design with compressed vectors and host graph access.
 - [SPFresh: Incremental In-Place Update for Billion-Scale Vector Search](wiki/source-notes/spfresh-2023.md) - Source note on SPFresh and LIRE for fresh updates in disk-based vector search.
 - [SVFusion: A CPU-GPU Co-Processing Architecture for Large-Scale Real-Time Vector Search](wiki/source-notes/svfusion-2026.md) - Source note on SVFusion's CPU-GPU-disk streaming ANN design.
+- [Make the Most Out of Your SIMD Investments](wiki/source-notes/simd-investments-2020.md) - Source note on AVX-512 lane refill for control-flow divergence in compiled query pipelines.
+- [The FastLanes Compression Layout](wiki/source-notes/fastlanes-2023.md) - Source note on SIMD-friendly compressed integer layout and scalar auto-vectorized decoding.
+- [Everything You Always Wanted to Know About Compiled and Vectorized Queries But Were Afraid to Ask](wiki/source-notes/compiled-vectorized-queries-2018.md) - Source note on vectorized versus data-centric compiled execution.
+- [Rethinking SIMD Vectorization for In-Memory Databases](wiki/source-notes/rethinking-simd-vectorization-2015.md) - Source note on SIMD gathers/scatters, selections, hash tables, partitioning, sorting, and joins.
+- [SIMD-Based Decoding of Posting Lists](wiki/source-notes/simd-based-decoding-posting-lists-2011.md) - Source note on SIMD decoding for compressed posting lists.
+- [SIMD Compression and the Intersection of Sorted Integers](wiki/source-notes/simd-compression-intersection-2014.md) - Source note on SIMD integer decoding and sorted-list intersection.
+- [Stream VByte](wiki/source-notes/stream-vbyte-2017.md) - Source note on SIMD-friendly byte-oriented integer compression.
 
 ## Analyses
 
 - [Billion-Scale Vector Search Literature Map](wiki/analyses/billion-scale-vector-search-literature-map.md) - Research map of covered and not-yet-ingested billion-scale vector search systems.
 - [Graph-Theoretic ANN Inbox Candidates](wiki/analyses/graph-theoretic-ann-inbox-candidates.md) - Candidate queue and rationale for proximity/RNG/MRNG/small-world graph papers, now including the first ingested batch.
 - [ANN Benchmarking And Graph Coverage Gaps](wiki/analyses/ann-benchmarking-and-graph-coverage-gaps.md) - Gap analysis and inbox candidate queue seeded by ANN-Benchmarks and the graph-based ANNS survey.
+- [SIMD And Scalar Quantization Inbox Candidates](wiki/analyses/simd-scalar-quantization-inbox-candidates.md) - Ingested batch record for ANN SIMD/PQ scan papers and scalar/bit quantization papers.
 - [ANNS Research Figure Design Guide](wiki/analyses/anns-research-figure-design-guide.md) - Figure-type taxonomy, representative screenshot atlas, and review workflow for ANNS research figures.
